@@ -1,0 +1,165 @@
+<div ng-show="user">
+    <div class="page-header" >
+        <h1>{{"parts" | translate}} <small>{{"parts.title" | translate}}</small></h1>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12">
+            <form class="form-inline pull-right" role="form">
+                <button class="btn btn-primary" ng-click="open_create_part_form()">
+                    {{"add" | translate}} <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div class="form-group">
+                    <label for="sort">{{"sort" | translate}}</label>
+                    <div class="input-group">
+                        <select ng-model="sort" class="form-control" ng-change="change_sort()">
+                            <option value="number" selected="selected">{{"number" | translate}}</option>
+                            <option value="description">{{"description" | translate}}</option>
+                            <option value="category.name">{{"category" | translate}}</option>
+                            <option value="material">{{"material" | translate}}</option>
+                            <option value="supplier.name">{{"supplier" | translate}}</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="reverse_order()">
+                                <i class="glyphicon" ng-class=" reverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes' "></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="query">{{"search" | translate}} <i class="glyphicon glyphicon-search"></i></label>
+                    <div class="input-group">
+                        <input type="query" class="form-control" id="query" name="query" ng-model="query" ng-change="basic_search()" />
+                        <span class="input-group-btn">
+                           <button class="btn btn-danger" ng-class="{'disabled': !query}" ng-click="clear_search()">
+                               <i class="glyphicon glyphicon-remove"></i>
+                           </button>
+                       </span>
+                    </div>
+                </div>
+                <div class="row clear-fix">
+                    <div class="col-xs-12">
+                        <a href="" class="pull-right" ng-click="open_search_part_form()">{{"search.advanced" | translate}}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row" >
+        <div class="col-xs-12">
+            {{"search.categories" | translate}} 
+            <button class="btn btn-default" ng-show="conditions.number" ng-click="clear_condition('number')">
+                {{"search.part.number" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.description" ng-click="clear_condition('description')">
+                {{"search.part.description" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.category" ng-click="clear_condition('category')">
+                {{"search.part.category" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.material" ng-click="clear_condition('material')">
+                {{"search.part.material" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.supplier" ng-click="clear_condition('supplier')">
+                {{"search.part.supplier" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="alert alert-info col-xs-12" role="alert"
+        ng-hide="parts && parts.length > 0" >
+        {{"parts.none" | translate}}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12" 
+        ng-repeat="a_part in parts">
+            <div class="panel panel-default">
+                <table class="table table-condensed">
+                    <tr>
+                        <th colspan="2" class="active">{{"part" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"part.number" | translate}}</th>
+                        <td>{{a_part.number}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"description" | translate}}</th>
+                        <td>{{a_part.description}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"category" | translate}}</th>
+                        <td>{{a_part.category.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"material" | translate}}</th>
+                        <td>{{a_part.material}}</td>
+                    </tr>
+                    <tr ng-show="a_part.dimensions && a_part.dimensions.length > 0">
+                        <th colspan="2" class="active">{{"dimensions" | translate}}</th>
+                    </tr>
+                    <tr ng-repeat="a_dimension in a_part.dimensions">
+                        <th>{{a_dimension.name}}</th>
+                        <td>
+                            {{"dimension.value.and.unit" | translate:a_dimension}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="active">{{"supplier" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"name" | translate}}</th>
+                        <td>{{a_part.supplier.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"email" | translate}}</th>
+                        <td>{{a_part.supplier.contact.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"www" | translate}}</th>
+                        <td>{{a_part.supplier.contact.web_site}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"phone" | translate}}</th>
+                        <td>{{a_part.supplier.contact.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"country" | translate}}</th>
+                        <td>{{a_part.supplier.contact.address.country}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"city" | translate}}</th>
+                        <td>{{a_part.supplier.contact.address.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"postal.code" | translate}}</th>
+                        <td>{{a_part.supplier.contact.address.postal_code}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"street" | translate}}</th>
+                        <td>{{a_part.supplier.contact.address.street}}</td>
+                    </tr>
+                </table>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right btn-group" role="group">
+                        <button class="btn btn-default" ng-click="open_edit_part_form(a_part)">
+                            {{"edit" | translate}} <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button class="btn btn-danger" type="button"
+                            ng-click="delete_part(a_part)">
+                            {{"delete" | translate}} <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <pagination total-items="totalItems" items-per-page="itemsPerPage"
+           ng-change="search(query, conditions, currentPage)" ng-model="currentPage"
+           class="pagination-sm" max-size="maxSize" boundary-links="true"
+           rotate="false" previous-text="{{'previous' | translate}}"
+           next-text="{{'next' | translate}}" first-text="{{'first' | translate}}"
+           last-text="{{'last' | translate}}">
+       </pagination>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<a>
+	<span ng-if="match.model.name"
+	   bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.email"
+	   bind-html-unsafe="match.model.contact.email | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.web_site"
+	   bind-html-unsafe="match.model.contact.web_site | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.phone"
+	   bind-html-unsafe="match.model.contact.phone | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.address && match.model.contact.address.country"
+	   bind-html-unsafe="match.model.contact.address.country | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.address && match.model.contact.address.city"
+	   bind-html-unsafe="match.model.contact.address.city | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.address && match.model.contact.address.postal_code"
+	   bind-html-unsafe="match.model.contact.address.postal_code | typeaheadHighlight:query"></span>
+	<span ng-if="match.model.contact && match.model.contact.address && match.model.contact.address.street"
+	   bind-html-unsafe="match.model.contact.address.street | typeaheadHighlight:query"></span>
+</a>

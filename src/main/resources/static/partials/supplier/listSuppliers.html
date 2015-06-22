@@ -1,0 +1,147 @@
+<div ng-show="user">
+    <div class="page-header" >
+        <h1>{{"suppliers" | translate}} <small>{{"suppliers.title" | translate}}</small></h1>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12">
+            <form class="form-inline pull-right" role="form">
+                <button class="btn btn-primary" ng-click="open_create_supplier_form()">
+                    {{"add" | translate}} <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div class="form-group">
+                    <label for="sort">{{"sort" | translate}}</label>
+                    <div class="input-group">
+                        <select ng-model="sort" class="form-control" ng-change="change_sort()">
+                            <option value="name" selected="selected">{{"name" | translate}}</option>
+                            <option value="contact.email">{{"email" | translate}}</option>
+                            <!-- <option value="contact.web_site">{{"www" | translate}}</option> -->
+                            <option value="contact.phone">{{"phone" | translate}}</option>
+                            <option value="contact.address.country">{{"country" | translate}}</option>
+                            <option value="contact.address.city">{{"city" | translate}}</option>
+                            <option value="contact.address.street">{{"street" | translate}}</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="reverse_order()">
+                                <i class="glyphicon" ng-class=" reverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes' "></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="query">{{"search" | translate}} <i class="glyphicon glyphicon-search"></i></label>
+                    <div class="input-group">
+                       <input type="query" class="form-control" id="query" name="query"
+                           ng-model="query" ng-change="basic_search()"/>
+                       <span class="input-group-btn">
+                           <button class="btn btn-danger" ng-class="{'disabled': !query}" ng-click="clear_search()">
+                               <i class="glyphicon glyphicon-remove"></i>
+                           </button>
+                       </span>
+                    </div>
+                </div>
+				<div class="row clear-fix">
+					<div class="col-xs-12">
+						<a href="" class="pull-right"
+							ng-click="open_search_supplier_form()">{{"search.advanced" | translate}}</a>
+					</div>
+				</div>
+			</form>
+        </div>
+    </div>
+    <hr> 
+    <div class="row" >
+        <div class="col-xs-12">
+            {{"search.categories" | translate}} 
+            <button class="btn btn-default" ng-show="conditions.name" ng-click="clear_condition('name')">
+                {{"search.name" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.email" ng-click="clear_condition('email')">
+                {{"search.email" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.web_site" ng-click="clear_condition('web_site')">
+                {{"search.www" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.phone" ng-click="clear_condition('phone')">
+                {{"search.phone" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.country" ng-click="clear_condition('country')">
+                {{"search.country" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.city" ng-click="clear_condition('city')">
+                {{"search.city" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.street" ng-click="clear_condition('street')">
+                {{"search.street" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="alert alert-info col-xs-12" role="alert"
+        ng-hide="suppliers && suppliers.length > 0" >
+        {{"suppliers.none" | translate}}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12" 
+        ng-repeat="a_supplier in suppliers">
+            <div class="panel panel-default">
+                <table class="table table-condensed">
+                    <tr>
+                        <th colspan="2" class="active">{{"supplier" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"name" | translate}}</th>
+                        <td>{{a_supplier.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"email" | translate}}</th>
+                        <td>{{a_supplier.contact.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"www" | translate}}</th>
+                        <td>{{a_supplier.contact.web_site}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"phone" | translate}}</th>
+                        <td>{{a_supplier.contact.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"country" | translate}}</th>
+                        <td>{{a_supplier.contact.address.country}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"city" | translate}}</th>
+                        <td>{{a_supplier.contact.address.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"postal.code" | translate}}</th>
+                        <td>{{a_supplier.contact.address.postal_code}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"street" | translate}}</th>
+                        <td>{{a_supplier.contact.address.street}}</td>
+                    </tr>
+                </table>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right btn-group" role="group">
+                        <button class="btn btn-default" ng-click="open_edit_supplier_form(a_supplier)">
+                            {{"edit" | translate}} <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button class="btn btn-danger" type="button"
+                            ng-click="delete_supplier(a_supplier)">
+                            {{"delete" | translate}} <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <pagination total-items="totalItems" items-per-page="itemsPerPage"
+           ng-change="search(query, conditions, currentPage)" ng-model="currentPage"
+           class="pagination-sm" max-size="maxSize" boundary-links="true"
+           rotate="false" previous-text="{{'previous' | translate}}"
+           next-text="{{'next' | translate}}" first-text="{{'first' | translate}}"
+           last-text="{{'last' | translate}}">
+       </pagination>
+    </div>
+</div>

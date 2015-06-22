@@ -1,0 +1,79 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{"supplier.search" | translate}}</h3>
+</div>
+<div class="modal-body">
+    <form name="search_supplier_form" class="form-horizontal"
+        role="form" novalidate ng-submit="ok()">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">{{"name" | translate}}</label>
+			<div class="col-sm-10">
+				<input type="search" id="name" name="name" class="form-control" ng-change="hints(conditions.name)"
+					ng-model="conditions.name" autocomplete="off" autofocus
+					typeahead="supplier.name for supplier in suppliers
+					| filter:{name: '!null'} | unique:'name'" />
+			</div>
+		</div>
+		<div class="form-group">
+            <label for="email" class="col-sm-2 control-label">{{"email" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="email" name="email" class="form-control"
+                    ng-change="hints(conditions.email)" ng-model="conditions.email" autocomplete="off"
+                    typeahead="supplier.contact.email for supplier in suppliers
+                    | filter:{contact: {email: '!null'}} | unique:'contact.email'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="www" class="col-sm-2 control-label">{{"www" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="www" name="www" class="form-control"
+                    ng-change="hints(conditions.web_site)" ng-model="conditions.web_site" autocomplete="off"
+                    typeahead="supplier.contact.web_site for supplier in suppliers
+                    | filter:{contact: {web_site: '!null'}} | unique:'contact.web_site'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone" class="col-sm-2 control-label">{{"phone" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="phone" name="phone" class="form-control"
+                    ng-change="hints(conditions.phone)" ng-model="conditions.phone" autocomplete="off"
+                    typeahead="supplier.contact.phone for supplier in suppliers
+                    | filter:{contact: {phone: '!null'}} | unique:'contact.phone'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country" class="col-sm-2 control-label">{{"country" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="country" name="country" class="form-control"
+                    ng-change="hints(conditions.country)" ng-model="conditions.country" autocomplete="off"
+                    typeahead="supplier.contact.address.country for supplier in suppliers
+                    | filter:{contact: {address: {country: '!null'}}} | unique:'contact.address.country'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city" class="col-sm-2 control-label">{{"city" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="city" name="city" class="form-control"
+                    ng-change="hints(conditions.city)" ng-model="conditions.city" autocomplete="off"
+                    typeahead="supplier.contact.address.city for supplier in suppliers
+                    | filter:{contact: {address: {city: '!null'}}} | unique:'contact.address.city'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="street" class="col-sm-2 control-label">{{"street" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="street" name="street" class="form-control"
+                    ng-change="hints(conditions.street)" ng-model="conditions.street" autocomplete="off"
+                    typeahead="supplier.contact.address.street for supplier in suppliers
+                    | filter:{contact: {address: {street: '!null'}}} | unique:'contact.address.street'" />
+            </div>
+        </div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="ok()">
+		{{"search" | translate}} <i class="glyphicon glyphicon-search"></i>
+	</button>
+	<button class="btn btn-default" ng-click="exit()">
+		{{"exit" | translate}}<i class="glyphicon glyphicon-remove"></i>
+	</button>
+</div>

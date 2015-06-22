@@ -1,0 +1,1 @@
+angular.module('myApp', ['ui.router', 'ui.utils', 'ui.bootstrap', 'pascalprecht.translate', 'ngResource', 'ngCookies', 'myApp.controllers', 'myApp.services'])

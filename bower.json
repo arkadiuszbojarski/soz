@@ -1,0 +1,16 @@
+{
+  "name": "ng-spring-boot",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-resource": "~1.4.0",
+    "angular-ui-router": "~0.2.14",
+    "angular-ui-utils": "~0.2.3",
+    "angular-bootstrap": "~0.13.0",
+    "angular-translate": "~2.7.2",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-translate-storage-local": "~2.7.2",
+    "angular-translate-handler-log": "~2.7.2",
+    "bootstrap-css-only": "~3.3.4",
+    "angular-i18n": "~1.4.0"
+  }
+}

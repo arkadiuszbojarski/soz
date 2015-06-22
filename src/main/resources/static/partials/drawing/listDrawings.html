@@ -1,0 +1,80 @@
+<div ng-show="user">
+    <div class="page-header" >
+        <h1>{{"drawings" | translate}} <small>{{"drawings.title" | translate}}</small></h1>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12">
+            <form class="form-inline pull-right" role="form">
+                <button class="btn btn-primary" ng-click="open_create_drawing_form()">
+                    {{"add" | translate}} <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div class="form-group">
+                    <label for="sort">{{"sort" | translate}}</label>
+                    <div class="input-group">
+                        <select ng-model="sort" class="form-control">
+                            <option value="number" selected="selected">{{"number" | translate}}</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="reverse_order()">
+                                <i class="glyphicon" ng-class=" reverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes' "></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="query">{{"search" | translate}} <i class="glyphicon glyphicon-search"></i></label>
+                    <div class="input-group">
+                        <input type="query" class="form-control" id="query" name="query"
+                            ng-model="query" ng-change="search(query, 1)"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-class="{'disabled': !query}" ng-click="clear_search()">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="alert alert-info col-xs-12" role="alert" 
+        ng-hide="drawings && drawings.length > 0">
+        {{"drawings.none" | translate}}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12" 
+        ng-repeat="a_drawing in drawings">
+            <div class="panel panel-default">
+                <table class="table table-condensed">
+                    <tr>
+                        <th colspan="2" class="active">{{"drawing" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"number" | translate}}</th>
+                        <td>{{a_drawing.number}}</td>
+                    </tr>
+                </table>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right btn-group" role="group">
+                        <button class="btn btn-default" ng-click="open_edit_drawing_form(a_drawing)">
+                            {{"edit" | translate}} <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button class="btn btn-danger" type="button"
+                            ng-click="delete_drawing(a_drawing)">
+                            {{"delete" | translate}}  <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <pagination total-items="totalItems" items-per-page="itemsPerPage"
+           ng-change="search(query, currentPage)" ng-model="currentPage"
+           class="pagination-sm" max-size="maxSize" boundary-links="true"
+           rotate="false" previous-text="{{'previous' | translate}}"
+           next-text="{{'next' | translate}}" first-text="{{'first' | translate}}"
+           last-text="{{'last' | translate}}">
+       </pagination>
+    </div>
+</div>

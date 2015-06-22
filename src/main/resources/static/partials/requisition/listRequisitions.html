@@ -1,0 +1,237 @@
+<div ng-show="user">
+    <div class="page-header" >
+        <h1>{{"requisitions" | translate}} <small>{{"requisitions.title" | translate}}</small></h1>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12">
+            <form class="form-inline pull-right" role="form">
+                <button class="btn btn-primary" ng-click="open_create_requisition_form()">
+                    {{"add" | translate}} <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <div class="form-group">
+                    <label for="sort">{{"sort" | translate}}</label>
+                    <div class="input-group">
+                        <select ng-model="sort" class="form-control" ng-change="change_sort()">
+                            <option value="number" selected="selected">{{"number" | translate}}</option>
+                            <option value="start">{{"created" | translate}}</option>
+                            <option value="author.email">{{"author" | translate}}</option>
+                            <option value="status">{{"status" | translate}}</option>
+                            <option value="element">{{"element" | translate}}</option>
+                            <option value="drawing.number">{{"drawing" | translate}}</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="reverse_order()">
+                                <i class="glyphicon" ng-class=" reverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes' "></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="query">
+                        {{"search" | translate}} <i class="glyphicon glyphicon-search"></i>
+                    </label>
+                    <div class="input-group">
+                        <input type="query" class="form-control" id="query" name="query"
+                            ng-model="query" ng-change="basic_search()"/>
+                        <span class="input-group-btn">
+                           <button class="btn btn-danger" ng-class="{'disabled': !query}" ng-click="clear_search()">
+                               <i class="glyphicon glyphicon-remove"></i>
+                           </button>
+                       </span>
+                    </div>
+                </div>
+                <div class="row clear-fix">
+                    <div class="col-xs-12">
+                        <a href="" class="pull-right"
+                            ng-click="open_search_requisition_form()">{{"search.advanced" | translate}}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row" >
+        <div class="col-xs-12">
+            {{"search.categories" | translate}}  
+            <button class="btn btn-default" ng-show="conditions.number" ng-click="clear_condition('number')">
+                {{"search.number" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.after" ng-click="clear_condition('after')">
+                {{"search.after" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.before" ng-click="clear_condition('before')">
+                {{"search.before" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.author" ng-click="clear_condition('author')">
+                {{"search.author" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.status" ng-click="clear_condition('status')">
+                {{"search.status" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.element" ng-click="clear_condition('element')">
+                {{"search.element" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.part" ng-click="clear_condition('part')">
+                {{"search.requisition.part.number" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.description" ng-click="clear_condition('description')">
+                {{"search.requisition.part.description" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.category" ng-click="clear_condition('category')">
+                {{"search.requisition.part.category" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.material" ng-click="clear_condition('material')">
+                {{"search.requisition.part.material" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.supplier" ng-click="clear_condition('supplier')">
+                {{"search.requisition.part.supplier" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-default" ng-show="conditions.drawing" ng-click="clear_condition('drawing')">
+                {{"search.drawing.number" | translate:conditions}} <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="alert alert-info col-xs-12" role="alert" 
+        ng-hide="requisitions && requisitions.length > 0">
+        {{"requisitions.none" | translate}}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="a_requisition in requisitions">
+            <div class="panel panel-default">
+                <table class="table table-condensed">
+                    <tr>
+                        <th colspan="2" class="active">
+	                        <span ng-hide="a_requisition.end">{{"requisition" | translate}}</span>
+	                        <span ng-show="a_requisition.end">{{"requisition.previous.version" | translate}}</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>{{"number" | translate}}</th>
+                        <td>{{a_requisition.number}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"created" | translate}}</th>
+                        <td>{{a_requisition.start | date}}</td>
+                    </tr>
+                    <tr ng-show="a_requisition.end">
+                        <th>{{"ended" | translate}}</th>
+                        <td>{{a_requisition.end | date}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"author" | translate}}</th>
+                        <td>{{a_requisition.author.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"status" | translate}}</th>
+                        <td>{{a_requisition.status | translate}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"amount" | translate}}</th>
+                        <td>{{"requisition.amount.and.unit" | translate:a_requisition}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"drawing.number" | translate}}</th>
+                        <td>{{a_requisition.drawing.number}}
+                    </tr>
+                    <tr>
+                        <th>{{"element" | translate}}</th>
+                        <td>{{a_requisition.element}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="active">{{"part" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"part.number" | translate}}</th>
+                        <td>{{a_requisition.part.number}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"description" | translate}}</th>
+                        <td>{{a_requisition.part.description}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"category" | translate}}</th>
+                        <td>{{a_requisition.part.category.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"material" | translate}}</th>
+                        <td>{{a_requisition.part.material}}</td>
+                    </tr>
+                    <tr ng-show="a_requisition.part.dimensions && a_requisition.part.dimensions.length > 0">
+                        <th colspan="2" class="active">{{"dimensions" | translate}}</th>
+                    </tr>
+                    <tr ng-repeat="a_dimension in a_requisition.part.dimensions">
+                        <th>{{a_dimension.name}}</th>
+                        <td>
+                            {{"dimension.value.and.unit" | translate:a_dimension}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="active">{{"supplier" | translate}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{"name" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"email" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"www" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.web_site}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"phone" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"country" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.address.country}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"city" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.address.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"postal.code" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.address.postal_code}}</td>
+                    </tr>
+                    <tr>
+                        <th>{{"street" | translate}}</th>
+                        <td>{{a_requisition.part.supplier.contact.address.street}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="active">{{"comments" | translate}}</th>
+                    </tr>
+                    <tr ng-show="a_requisition.comment">
+                        <td colspan="2">{{a_requisition.comment}}</td>
+                    </tr>
+                </table>
+                <div class="panel-footer clearfix" ng-hide="a_requisition.end">
+                    <div class="pull-right" ng-class="{'btn-group': canEditRequisition(a_requisition)}" role="group">
+                        <button class="btn btn-default" ng-click="history(a_requisition)">
+                            {{"requisition.history" | translate}}
+                        </button>
+                        <button class="btn btn-default" ng-click="open_edit_requisition_form(a_requisition)" ng-show="canEditRequisition(a_requisition)">
+                            {{"edit" | translate}} <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button class="btn btn-danger" type="button" ng-show="isAdmin()"
+                            ng-click="delete_requisition(a_requisition)">
+                            {{"delete" | translate}}  <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <pagination total-items="totalItems" items-per-page="itemsPerPage"
+           ng-change="search(query, conditions, currentPage)" ng-model="currentPage"
+           class="pagination-sm" max-size="maxSize" boundary-links="true"
+           rotate="false" previous-text="{{'previous' | translate}}"
+           next-text="{{'next' | translate}}" first-text="{{'first' | translate}}"
+           last-text="{{'last' | translate}}">
+       </pagination>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="modal-header" >
+    <h3 class="modal-title">{{"requisition.search" | translate}}</h3>
+</div>
+<div class="modal-body" >
+    <form name="search_part_form" class="form-horizontal"
+        role="form" novalidate ng-submit="ok()">
+        <fieldset>
+        <legend>{{"requisition" | translate}}</legend>
+        <div class="form-group">
+            <label for="number" class="col-sm-2 control-label">{{"number" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="number" name="number" class="form-control"
+                    ng-model="conditions.number" autocomplete="off" autofocus
+                    ng-change="hint(conditions.number)"
+                    typeahead="requisition.number for requisition in requisitions | filter:{number: '!null'} | unique:'number'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="after" class="col-sm-2 control-label">{{"after" | translate}}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="date" id="after" name="after" class="form-control" datepicker-popup ng-model="conditions.after"
+                        is-open="after_opened" current-text="{{'today' | translate}}" clear-text="{{'clear' | translate}}" close-text="{{'exit' | translate}}" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open_after($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>                
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="before" class="col-sm-2 control-label">{{"before" | translate}}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="date" id="before" name="before" class="form-control" datepicker-popup ng-model="conditions.before"
+                        is-open="before_opened" current-text="{{'today' | translate}}" clear-text="{{'clear' | translate}}" close-text="{{'exit' | translate}}" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open_before($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="author" class="col-sm-2 control-label">{{"author" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="author" name="author" class="form-control"
+                    ng-model="conditions.author" autocomplete="off"
+                    ng-change="hint(conditions.author)"
+                    typeahead="requisition.author.email for requisition in requisitions
+                    | filter:{author: {email: '!null'}} | unique:'author.email'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="status" class="col-sm-2 control-label">{{"status" | translate}}</label>
+            <div class="col-sm-10">
+                <select ng-model="conditions.status" class="form-control" ng-options="status as status | translate for status in statuses"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="element" class="col-sm-2 control-label">{{"element" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="element" name="element" class="form-control"
+                    ng-model="conditions.element" autocomplete="off"
+                    ng-change="hint(conditions.element)"
+                    typeahead="requisition.element for requisition in requisitions
+                    | filter:{element: '!null'} | unique:'element'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="drawing" class="col-sm-2 control-label">{{"drawing" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="drawing" name="drawing" class="form-control"
+                    ng-model="conditions.drawing" autocomplete="off"
+                    ng-change="hint_drawings(conditions.drawing)"
+                    typeahead="drawing.number for drawing in drawings | filter:{number: '!null'} | unique:'number'" />
+            </div>
+        </div>
+        </fieldset>
+        <!-- Kryteria częci -->
+        <fieldset>
+        <legend>{{"part" | translate}}</legend>
+        <div class="form-group">
+            <label for="number" class="col-sm-2 control-label">{{"number" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="number" name="number" class="form-control"
+                    ng-model="conditions.part" autocomplete="off"
+                    ng-change="hint_parts(conditions.part)"
+                    typeahead="part.number for part in parts | filter:{number: '!null'} | unique:'number'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">{{"description" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="description" name="description" class="form-control"
+                    ng-model="conditions.description" autocomplete="off"
+                    ng-change="hint_parts(conditions.description)"
+                    typeahead="part.description for part in parts | filter:{description: '!null'} | unique:'description'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category" class="col-sm-2 control-label">{{"category" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="category" name="category" class="form-control"
+                    ng-model="conditions.category" autocomplete="off"
+                    ng-change="hint_categories(conditions.category)"
+                    typeahead="category.name for category in categories | filter:{name: '!null'} | unique:'name'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="material" class="col-sm-2 control-label">{{"material" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="material" name="material" class="form-control"
+                    ng-model="conditions.material" autocomplete="off"
+                    ng-change="hint_parts(conditions.material)"
+                    typeahead="part.material for part in parts | filter:{material: '!null'} | unique:'material'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="supplier" class="col-sm-2 control-label">{{"supplier" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="search" id="supplier" name="supplier" class="form-control"
+                    ng-model="conditions.supplier" autocomplete="off"
+                    ng-change="hint_suppliers(conditions.supplier)"
+                    typeahead="supplier.name as supplier for supplier in suppliers | unique:'name'"
+                    typeahead-template-url="partials/supplier/supplierTemplate.html"/>
+            </div>
+        </div>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer" >
+    <button class="btn btn-success" ng-click="ok()">
+        {{"search" | translate}} <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <button class="btn btn-default" ng-click="exit()">
+        {{"exit" | translate}} <i class="glyphicon glyphicon-remove"></i>
+    </button>
+</div>

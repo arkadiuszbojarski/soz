@@ -1,0 +1,67 @@
+<div class="modal-header" >
+    <h3 class="modal-title">{{"edit.account" | translate}}</h3>
+</div>
+<div class="modal-body" ng-show="isAdmin()" >
+    <div>
+        <alert ng-show="alert" type="{{alert.type}}">
+            {{alert.msg | translate}}
+        </alert>
+    </div>
+    <form name="account_form" class="form-horizontal" role="form"
+        novalidate ng-submit="action_account()">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">{{"name" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="text" id="username" name="username" class="form-control"
+                    ng-model="account.username" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'username' }:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">{{"email" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="text" id="email" name="email" class="form-control"
+                    ng-model="account.email" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'email' }:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="enabled" class="col-sm-2 control-label">{{"enabled" | translate}}</label>
+            <div class="col-sm-10">
+                <select id="enabled" name="enabled" class="form-control"
+                    ng-model="account.enabled" ng-options="option.value as option.value | translate for option in options">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="locked" class="col-sm-2 control-label">{{"locked" | translate}}</label>
+            <div class="col-sm-10">
+                <select id="locked" name="locked" class="form-control"
+                    ng-model="account.locked" ng-options="option.value as option.value | translate for option in options">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="locked" class="col-sm-2 control-label">{{"role" | translate}}</label>
+            <div class="col-sm-10">
+                <select id="locked" name="locked" class="form-control"
+                    ng-model="account.role" ng-options="role as role | translate for role in roles">
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer clear-fix" >
+    <div class="btn-group pull-right">
+	    <button class="btn btn-success" ng-click="action_account()">
+	        {{"save.changes" | translate}} <i class="glyphicon glyphicon-ok"></i>
+	    </button>
+	    <button class="btn btn-default" ng-click="exit()">
+	        {{"exit" | translate}} <i class="glyphicon glyphicon-remove"></i>
+	    </button>
+    </div>
+</div>

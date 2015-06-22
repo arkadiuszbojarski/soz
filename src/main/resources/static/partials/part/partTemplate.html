@@ -1,0 +1,21 @@
+<a>
+    <span ng-if="match.model.number" bind-html-unsafe="match.model.number | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.description" bind-html-unsafe="match.model.description | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.category.name" bind-html-unsafe="match.model.category.name | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.material" bind-html-unsafe="match.model.material | typeaheadHighlight:query"></span>
+    <br>
+    <span ng-if="match.model.dimensions && match.model.dimensions.length > 0">
+        <span ng-repeat="a_dimension in match.model.dimensions">
+            {{a_dimension.name}} {{a_dimension.value}} {{a_dimension.unit.name}}<br>
+        </span>
+    </span>
+
+    <span ng-if="match.model.supplier.name" bind-html-unsafe="match.model.supplier.name | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.email" bind-html-unsafe="match.model.supplier.contact.email | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.web_site" bind-html-unsafe="match.model.supplier.contact.web_site | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.phone" bind-html-unsafe="match.model.supplier.contact.phone | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.address && match.model.supplier.contact.address.country" bind-html-unsafe="match.model.supplier.contact.address.country | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.address && match.model.supplier.contact.address.city" bind-html-unsafe="match.model.supplier.contact.address.city | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.address && match.model.supplier.contact.address.postal_code" bind-html-unsafe="match.model.supplier.contact.address.postal_code | typeaheadHighlight:query"></span>
+    <span ng-if="match.model.supplier.contact && match.model.supplier.contact.address && match.model.supplier.contact.address.street" bind-html-unsafe="match.model.supplier.contact.address.street | typeaheadHighlight:query"></span>
+</a>

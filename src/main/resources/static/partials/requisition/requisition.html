@@ -1,0 +1,330 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-hide="requisition.id">{{"new.requisition" | translate}}</h3>
+    <h3 class="modal-title" ng-show="requisition.id">{{"edit.requisition" | translate}}</h3>
+</div>
+<div class="modal-body">
+    <div>
+        <alert ng-show="alert" type="{{alert.type}}">
+            {{alert.msg | translate}}
+        </alert>
+    </div>
+    <form name="requisition_form" class="form-horizontal" role="form" ng-submit="action_requisition()" >
+        <fieldset>
+        <legend>{{"requisition" | translate}}</legend>
+	        <div class="form-group">
+	            <label for="element" class="col-sm-2 control-label">{{"element" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="element" name="element" class="form-control"
+	                    ng-model="requisition.element" autocomplete="off" autofocus/>
+	            </div>
+	        </div>
+	        <div class="form-group" ng-show="requisition.status">
+	           <label for="status" class="col-sm-2 control-label">{{"status" | translate}}</label>
+	           <div class="col-sm-10">
+	               <select name="status" class="form-control" ng-model="requisition.status"
+	                   ng-options="status as status | translate for status in statuses">
+	               </select>
+	           </div>
+	        </div>
+		    <div class="form-group">
+	            <label for="amount" class="col-sm-2 control-label">{{"amount" | translate}}</label>
+	            <div class="col-sm-5">
+	                <input type="number" min="0" step="0.0001" class="form-control"
+	                    ng-model="requisition.amount" autocomplete="off"/>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'amount'}:true">
+	                    {{error.code | translate}}
+	                </alert>
+	            </div>
+	            <div class="col-sm-5 scrollable-dropdown-menu">
+                    <div class="input-group">
+	                    <input type="text" class="form-control" ng-disabled="requisition.unit.id"
+	                        ng-model="requisition.unit.name" autocomplete="off"
+	                        ng-change="hint_units(requisition.unit.name)"
+	                        typeahead-on-select="requisitionUnitSelect($item, $model, $label)"
+	                        typeahead="unit.name for unit in units | unique:'name'"/>
+	                    <div class="input-group-btn">
+	                        <button type="button" class="btn btn-default" ng-disabled="!requisition.unit.id" ng-click="requisition.unit.id=''">
+	                            <i class="glyphicon glyphicon-edit"></i>
+	                        </button>
+	                    </div>
+                    </div>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'unit.name'}:true">
+	                        {{error.code | translate}}
+	                </alert>
+	            </div>
+            </div>
+            <div class="form-group">
+                <label for="drawing" class="col-sm-2 control-label">{{"drawing.number" | translate}}</label>
+                <div class="col-sm-10 scrollable-dropdown-menu">
+                    <div class="input-group">
+	                    <input type="text" id="drawing" name="drawing" class="form-control" ng-disabled="requisition.drawing.id"
+	                        ng-model="requisition.drawing.number" autocomplete="off"
+	                        ng-change="hint_drawings(requisition.drawing.number)"
+	                        typeahead-on-select="drawingSelect($item, $model, $label)"
+	                        typeahead="drawing.number for drawing in drawings | filter:$viewValue | unique:'number'" />
+	                    <div class="input-group-btn">
+	                        <button type="button" class="btn btn-default" ng-disabled="!requisition.drawing.id" ng-click="requisition.drawing.id=''">
+	                            <i class="glyphicon glyphicon-edit"></i>
+	                        </button>
+	                    </div>
+                    </div>
+                    <alert type="danger" ng-repeat="error in errors | filter:{field: 'drawing.number'}:true">
+                        {{error.code | translate}}
+                    </alert>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comment" class="col-sm-2 control-label">{{"comments" | translate}}</label>
+                <div class="col-sm-10">
+                    <textarea id="comment" name="comment" form="create_requisition_form" class="form-control"
+                        ng-model="requisition.comment" autocomplete="off"></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+	        <fieldset ng-disabled="requisition.part.id">
+	        <legend>{{"part" | translate}}</legend>
+	        <div class="form-group">
+	            <label for="part_number" class="col-sm-2 control-label">{{"part.number" | translate}}</label>
+	            <div class="col-sm-10 scrollable-dropdown-menu">
+	                <input type="text" id="part_number" name="part_number" class="form-control"
+	                    ng-model="requisition.part.number" autocomplete="off"
+	                    ng-change="hint_parts(requisition.part.number)"
+	                    typeahead="part.number as part for part in parts | filter:$viewValue | unique:'number'"
+	                    typeahead-template-url="partials/part/partTemplate.html"
+	                    typeahead-on-select="partSelect($item, $model, $label)"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="part_description" class="col-sm-2 control-label">{{"description" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="part_description" name="part_description" class="form-control"
+	                    ng-model="requisition.part.description" autocomplete="off"
+	                    ng-change="hint_parts(requisition.part.description)"
+	                    typeahead="part.description as part for part in parts | filter:$viewValue | unique:'number'"
+	                    typeahead-template-url="partials/part/partTemplate.html"
+	                    typeahead-on-select="partSelect($item, $model, $label)"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="category" class="col-sm-2 control-label">{{"category" | translate}}</label>
+	            <div class="col-sm-10 scrollable-dropdown-menu">
+	                <div class="input-group">
+	                    <input type="text" id="category" name="category" class="form-control"
+	                        ng-model="requisition.part.category.name" autocomplete="off"
+	                        ng-change="hint_categories(requisition.part.category.name)"
+	                        ng-disabled="requisition.part.category.id"
+	                        typeahead="category.name for category in categories | filter:$viewValue | unique:'name'"
+	                        typeahead-on-select="categorySelect($item, $model, $label)"/>
+	                    <div class="input-group-btn">
+	                       <button type="button" class="btn btn-default" ng-disabled="!requisition.part.category.id" ng-click="requisition.part.category.id=''">
+	                           <i class="glyphicon glyphicon-edit"></i>
+	                       </button>
+	                    </div>
+                    </div>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'category.name' }">
+	                    {{error.code | translate}}
+	                </alert>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="part_material" class="col-sm-2 control-label">{{"material" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="part_material" name="part_material" class="form-control"
+	                    ng-model="requisition.part.material" autocomplete="off"
+	                    ng-change="hint_parts(requisition.part.material)"
+	                    typeahead="part.material as part for part in parts
+	                    | filter:$viewValue | unique:'number'"
+	                    typeahead-template-url="partials/part/partTemplate.html"
+	                    typeahead-on-select="partSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        </fieldset>
+	        <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-default pull-right" ng-disabled="!requisition.part.id" ng-click="requisition.part.id=''">
+                        {{"part.change" | translate}} <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+                </div>
+            </div>
+	        <fieldset ng-disabled="requisition.part.id">
+	        <legend>{{"dimensions" | translate}}</legend>
+	        <div class="form-group" ng-show="requisition.part.dimensions && requisition.part.dimensions.length > 0">
+	            <div class="text-left">
+	                <label class="col-xs-4 col-sm-offset-2 col-sm-4 control-label">{{"dimension.name" | translate}}</label>
+	                <label class="col-xs-4 col-sm-3 control-label">{{"dimension.value" | translate}}</label>
+	                <label class="col-xs-4 col-sm-3 control-label">{{"dimension.unit" | translate}}</label>
+	            </div>
+	        </div>
+	        <div class="form-group" ng-repeat="a_dimension in requisition.part.dimensions">
+	            <div ng-init="parent_index = $index">
+	                <div class="col-xs-4 col-sm-offset-2 col-sm-4">
+	                   <div class="input-group">
+		                   <span class="input-group-btn">
+                                <button ng-click="remove_dimension(a_dimension)" class="btn btn-danger">
+                                     <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+		                    <input type="text" class="form-control"
+		                        ng-model="a_dimension.name" autocomplete="off"/>
+	                    </div>
+	                    <alert type="danger" ng-repeat="error in errors | filter:{field: 'dimensions[' + parent_index + '].name'}:true">
+	                        {{error.code | translate}}
+	                    </alert>
+	                </div>
+	                <div class="col-xs-4 col-sm-3">
+	                    <input type="number" class="form-control" min = "0" step="0.0001"
+	                        ng-model="a_dimension.value" autocomplete="off"/>
+	                    <alert type="danger" ng-repeat="error in errors | filter:{field: 'dimensions[' + parent_index + '].value'}:true">
+	                        {{error.code | translate}}
+	                    </alert>
+	                </div>
+	                <div class="col-xs-4 col-sm-3 scrollable-dropdown-menu">
+	                    <div class="input-group">
+	                        <input type="text" class="form-control" ng-disabled="a_dimension.unit.id"
+	                            ng-model="a_dimension.unit.name" autocomplete="off"
+	                            ng-change="hint_units(a_dimension.unit.name)"
+	                            typeahead="unit.name for unit in units | filter:$viewValue | unique:'name'"
+	                            typeahead-on-select="dimensionUnitSelect($item, $model, $label, a_dimension)"/>
+	                        <span class="input-group-btn">
+	                            <button type="button" class="btn btn-default" ng-disabled="!a_dimension.unit.id" ng-click="a_dimension.unit.id=''">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </button>
+	                        </span>
+	                    </div>
+	                    <alert type="danger" ng-repeat="error in errors | filter:{field: 'dimensions[' + parent_index + '].unit.name'}:true">
+                            {{error.code | translate}}
+	                    </alert>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-12">
+	                <button type="button" class="btn btn-default pull-right" ng-click="add_new_dimension()">
+	                    {{"new.dimension" | translate}} <i class="glyphicon glyphicon-plus"></i>
+	                </button>
+	            </div>
+	        </div>
+	        </fieldset>
+	        <fieldset ng-disabled="requisition.part.id || requisition.part.supplier.id">
+	        <legend>{{"supplier" | translate}}</legend>
+	        <div class="form-group">
+	            <label for="supplier_name" class="col-sm-2 control-label">{{"name" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_name" name="supplier_name" class="form-control"
+	                    ng-model="requisition.part.supplier.name" autocomplete="off"
+	                    ng-change="hint_suppliers(requisition.part.supplier.name)"
+	                    typeahead="supplier.name as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)"/>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'supplier.name'}:true">
+	                    {{error.code | translate}}
+	                </alert>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier_email" class="col-sm-2 control-label">{{"email" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_email" name="supplier_email" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.email" autocomplete="off"
+	                    ng-change="hint_supplier(requisition.part.supplier.contact.email)"
+	                    typeahead="supplier.contact.email as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier-www" class="col-sm-2 control-label">{{"www" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_www" name="supplier_www" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.web_site" autocomplete="off"
+	                    ng-change="hint_supplier(requisition.part.supplier.contact.web_site)"
+	                    typeahead="supplier.contact.web_site as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	            
+	        </div>
+	        <div class="form-group">
+	            <label for="phone" class="col-sm-2 control-label">{{"phone" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_phone" name="supplier_phone" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.phone" autocomplete="off"
+	                    ng-change="hint_supplier(requisition.part.supplier.contact.phone)"
+	                    typeahead="supplier.contact.phone as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier_country" class="col-sm-2 control-label">{{"country" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_country" name="supplier_country" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.address.country" autocomplete="off"
+	                    ng-change="hint_supplier(requisition.part.supplier.contact.address.country)"
+	                    typeahead="supplier.contact.address.country as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier_city" class="col-sm-2 control-label">{{"city" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_city" name="supplier_city" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.address.city" autocomplete="off"
+	                    ng-change="hint_suppliers(requisitions.part.supplier.contact.address.city)"
+	                    typeahead="supplier.contact.address.city as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier_postal_code" class="col-sm-2 control-label">{{"postal.code" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_postal_code" name="supplier_postal_code" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.address.postal_code" autocomplete="off"
+	                    ng-change="hint_suppliers(requisition.part.supplier.contact.address.postal_code)"
+	                    typeahead="supplier.contact.address.postal_code as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="supplier_street" class="col-sm-2 control-label">{{"street" | translate}}</label>
+	            <div class="col-sm-10">
+	                <input type="text" id="supplier_street" name="supplier_street" class="form-control"
+	                    ng-model="requisition.part.supplier.contact.address.street" autocomplete="off"
+	                    ng-change="hint_supplier(requisition.part.supplier.contact.address.street)"
+	                    typeahead="supplier.contact.address.street as supplier for supplier in suppliers
+	                    | filter:$viewValue | unique:'name' | limitTo:8"
+	                    typeahead-template-url="partials/supplier/supplierTemplate.html"
+	                    typeahead-on-select="supplierSelect($item, $model, $label)" />
+	            </div>
+	        </div>
+	        </fieldset>
+	        <div class="row">
+	            <div class="col-xs-12">
+	                <button type="button" class="btn btn-default pull-right"
+	                    ng-disabled="requisition.part.id || !requisition.part.supplier.id"
+	                    ng-click="requisition.part.supplier.id=''">
+	                    {{"supplier.change" | translate}} <i class="glyphicon glyphicon-edit"></i>
+	                </button>
+	            </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="action_requisition()">
+        <span ng-hide="requisition.id">{{"create" | translate}} </span>
+        <span ng-show="requisition.id">{{"save.changes" | translate}} </span>
+        <i class="glyphicon glyphicon-ok"></i></button>
+    <button class="btn btn-default" ng-click="exit()">{{"exit" | translate}} <i class="glyphicon glyphicon-remove"></i></button>
+</div>

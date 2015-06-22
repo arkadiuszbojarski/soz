@@ -1,0 +1,61 @@
+<div class="modal-header" >
+    <h3 class="modal-title">{{"new.account" | translate}}</h3>
+</div>
+<div class="modal-body" ng-show="isAdmin()" >
+    <div>
+        <alert ng-show="alert" type="{{alert.type}}">
+            {{alert.msg | translate}}
+        </alert>
+    </div>
+    <form name="account_form" class="form-horizontal" role="form"
+        novalidate ng-submit="action_account()">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">{{"name" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="text" id="username" name="username" class="form-control"
+                    ng-model="account.username" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'username' }:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">{{"email" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="text" id="email" name="email" class="form-control"
+                    ng-model="account.email" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'email' }:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">{{"password" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="password" id="password" name="password" class="form-control"
+                    ng-model="account.password" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'password'}:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password_rep" class="col-sm-2 control-label">{{"password.repeated" | translate}}</label>
+            <div class="col-sm-10">
+                <input type="password" id="password_rep" name="password_rep" class="form-control"
+                    ng-model="account.passwordRepeated" autocomplete="off" autofocus/>
+                <alert type="danger" ng-repeat="error in errors | filter:{field: 'passwordRepeated'}:true">
+                    {{error.code | translate}}
+                </alert>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer" >
+    <button class="btn btn-success" ng-click="action_account()">
+        {{"create" | translate}} <i class="glyphicon glyphicon-ok"></i>
+    </button>
+    <button class="btn btn-default" ng-click="exit()">
+        {{"exit" | translate}} <i class="glyphicon glyphicon-remove"></i>
+    </button>
+</div>
