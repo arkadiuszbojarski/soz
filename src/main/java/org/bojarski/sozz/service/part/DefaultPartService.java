@@ -8,6 +8,7 @@ import org.bojarski.sozz.model.domain.part.Part;
 import org.bojarski.sozz.model.domain.part.PartSearchConditions;
 import org.bojarski.sozz.model.domain.part.QPart;
 import org.bojarski.sozz.model.domain.requisition.Requisition;
+import org.bojarski.sozz.model.exception.AlreadyExistsException;
 import org.bojarski.sozz.model.exception.NotFoundException;
 import org.bojarski.sozz.model.exception.UsedException;
 import org.bojarski.sozz.repository.part.PartRepository;
@@ -40,6 +41,11 @@ public class DefaultPartService implements PartService {
     @Override
     @Transactional(readOnly= false)
     public Part create(Part part) {
+        Part existing = partRepository.findOneByNumber(part.getNumber());
+        if(existing != null) {
+            throw new AlreadyExistsException(Messages.PART_EXISTS, Messages.NUMBER, Messages.PART_EXISTS_DEFAULT);
+        }
+        
         return partRepository.save(partUtil.recreate(part));
     }
     
@@ -52,8 +58,14 @@ public class DefaultPartService implements PartService {
     @Override
     @Transactional(readOnly = false)
     public Part update(Long id, Part part) {
-        Part old = read(id);
-        return partUtil.updateOrCreate(old, part);
+        Part updated = read(id);
+        Part existing = partRepository.findOneByNumber(part.getNumber());
+        
+        if(existing != null && updated != existing) {
+            throw new AlreadyExistsException(Messages.PART_EXISTS, Messages.NUMBER, Messages.PART_EXISTS_DEFAULT);
+        }
+        
+        return partUtil.updateOrCreate(updated, part);
     }
 
     @Override

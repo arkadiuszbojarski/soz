@@ -93,6 +93,9 @@
 	                    typeahead="part.number as part for part in parts | filter:$viewValue | unique:'number'"
 	                    typeahead-template-url="partials/part/partTemplate.html"
 	                    typeahead-on-select="partSelect($item, $model, $label)"/>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'part.number' }">
+                        {{error.code | translate}}
+                    </alert>
 	            </div>
 	        </div>
 	        <div class="form-group">

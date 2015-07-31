@@ -74,7 +74,7 @@ angular.module('myApp.controllers').controller('DrawingsListController', functio
     }
     
     $scope.delete_drawing = function(a_drawing) {
-        Drawing.remove({id: a_drawing.id}).then(function () {
+        Drawing.remove({id: a_drawing.id}).$promise.then(function () {
         	$scope.search($scope.query, $scope.currentPage);
         }, function(fail){
         	if(fail.status !== 401 && fail.status !== 403) {

@@ -60,9 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/").permitAll()
-        .antMatchers("/**").permitAll()
         .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-        .anyRequest().fullyAuthenticated().and()
+        .antMatchers("/api/**").authenticated().and()
         .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
     }

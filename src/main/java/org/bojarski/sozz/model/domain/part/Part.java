@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import org.bojarski.sozz.model.domain.category.Category;
 import org.bojarski.sozz.model.domain.dimension.Dimension;
 import org.bojarski.sozz.model.domain.supplier.Supplier;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.common.base.MoreObjects;
 import com.mysema.query.annotations.QueryEntity;
@@ -33,7 +34,8 @@ public class Part {
     @Column(name = "id", nullable = false, updatable = false)
     private Long  id;
 
-    @Column(name = "number")
+    @NotBlank
+    @Column(name = "number", nullable = false, unique = true)
     private String number;
 
     @Column(name = "description")

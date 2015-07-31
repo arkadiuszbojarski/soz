@@ -35,6 +35,7 @@
     "fail.exists.category.name": "Istnieje już kategoria o podanej nazwie",
     "fail.exists.supplier.name": "Istnieje już dostawca o podanej nazwie",
     "fail.exists.drawing.number": "Istnieje już rysunek o podanej nazwie",
+    "fail.exists.part.number": "Istnieje już część o podanym numerze",
     "fail.exists.account.username": "Istnieje już użytkownik o podanej nazwie",
     "fail.exists.account.email": "Istnieje już użytkownik o podanym adresie email",
     

@@ -41,6 +41,15 @@ public class PartUtil {
                     return existingPart.get();
                 }
             }
+            
+            if(part.getNumber() != null) {
+                Optional<Part> existingPart = Optional
+                        .ofNullable(partRepository.findOneByNumber(part.getNumber()));
+                
+                if(existingPart.isPresent()) {
+                    return existingPart.get();
+                }
+            }
 
             Category category = categoryUtil.readOrCreate(part.getCategory());
             Supplier supplier = supplierUtil.readOrCreate(part.getSupplier());

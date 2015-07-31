@@ -18,5 +18,7 @@ public interface PartRepository extends JpaRepository<Part, Long>, QueryDslPredi
     
     @Query("select p from Part p inner join p.dimensions d where d.id = :id")
     Collection<Part> findByDimensionsUnitId(@Param("id") Long unit_id);
+
+    Part findOneByNumber(String number);
      
 }

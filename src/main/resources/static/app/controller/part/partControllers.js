@@ -111,7 +111,7 @@ angular.module('myApp.controllers').controller('PartsListController', function($
     }
     
     $scope.delete_part = function(a_part) {
-        Part.remove({id: a_part.id}).then(function () {
+        Part.remove({id: a_part.id}).$promise.then(function () {
         	$scope.search($scope.query, $scope.conditions, $scope.currentPage);
         }, function(fail){
         	if(fail.status !== 401 && fail.status !== 403) {

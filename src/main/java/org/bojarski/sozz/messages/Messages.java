@@ -37,6 +37,7 @@ public class Messages {
     public static final String DRAWING_EXISTS = "fail.exists.drawing.number";
     public static final String ACCOUNT_USERNAME_EXISTS = "fail.exists.account.username";
     public static final String ACCOUNT_EMAIL_EXISTS = "fail.exists.account.email";
+    public static final String PART_EXISTS = "fail.exists.part.number";
     
     public static final String NAME = "name";
     public static final String NUMBER = "number";
@@ -51,6 +52,7 @@ public class Messages {
     public static final String DRAWING_EXISTS_DEFAULT = "drawing number already exists";
     public static final String ACCOUNT_EMAIL_EXISTS_DEFAULT = "account email already exists";
     public static final String ACCOUNT_USERNAME_EXISTS_DEFAULT = "account name already exists";
+    public static final String PART_EXISTS_DEFAULT = "part number already exists";
     
     public static final String PASSWORDS_DO_NOT_MATCH = "NoMatch";
     public static final String WRONG_PASSWORD = "WrongPassword";

@@ -1,4 +1,4 @@
-angular.module('myApp.controllers').controller('LoginController', function($scope, $http, $state, $stateParams, TokenStore) {
+angular.module('myApp.controllers').controller('LoginController', function($scope, $rootScope, $http, $state, $stateParams, TokenStore, Account) {
 
 	$scope.error = $stateParams.error ? $stateParams.error : false;
 	
