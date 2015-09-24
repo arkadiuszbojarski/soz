@@ -17,6 +17,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
 import com.mysema.query.annotations.QueryEntity;
 
+/**
+ * Klasa obiektu domeny: konto użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @QueryEntity
 @Entity
 @Table(name = "account")
@@ -53,54 +58,107 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
     
+    /**
+     * Metoda zwracająca nazwę użytkownika.
+     * @return napis będą nazwą użytkownika
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * Metoda pozwalająca zmienić nazwę użytkownika.
+     * @param username napis będący nową nazwą użytkownika.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Metoda określająca czy konto użytkownika jest aktywowane.
+     * @return wartość logiczna określająca czy konto użytkownika jest aktywowane.
+     */
     public boolean isEnabled() {
         return this.enabled;
     }
 
+    /**
+     * Metoda pozwalająca zmienić to czy konto użytkownika jest aktywowane.
+     * @param enabled wartość logiczna określająca nowy stan aktywowania konta.
+     */
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     * Metoda określająca czy konta użytkownika jest zablokowane.
+     * @return wartość logiczna określająca czy konta użytkownika jest zablokowane.
+     */
     public boolean isLocked() {
         return this.locked;
     }
 
+    /**
+     * Metoda pozwalająca zmienić to czy konta użytkownika jest zablokowane.
+     * @param locked wartość logiczna określająca nowy stan zablokowania konta.
+     */
     public void setLocked(Boolean locked) {
         this.locked = locked;
     }
 
+    /**
+     * Metoda zwracająca adres email użytkownika.
+     * @return napis będący adresem email użytkownika.
+     */
     public String getEmail() {
         return this.email;
     }
 
+    
+    /**
+     * Metoda pozwalająca zmienić adres email użytkownika.
+     * @param email napis będący nowym adresem email użytkownika.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Metoda zwracająca hash hasła użytkownika.
+     * @return napis będący hash'em hasła użytkownika.
+     */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * Metoda pozwalająca zmienić hash hasła użytkownika.
+     * @param password napis będący nowym hash'em hasła użytkownika.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Metoda zwracająca numer id użytkownika.
+     * @return numer id użytkownika.
+     */
     public Long getId() {
         return this.id;
     }
     
+    /**
+     * Metoda zwracająca {@link Role} użytkownika.
+     * @return rola użytkownika.
+     */
     public Role getRole() {
         return this.role;
     }
 
+    /**
+     * Metoda pozwalająca zmienić rolę użytkownika.
+     * @param role nowa rola użytkownika.
+     */
     public void setRole(Role role) {
         this.role = role;
     }

@@ -6,6 +6,11 @@ import javax.validation.ConstraintValidatorContext;
 import org.bojarski.sozz.messages.Messages;
 import org.bojarski.sozz.model.domain.account.AccountPasswordForm;
 
+/**
+ * Klasa walidatora sprawdzającego spełnienie kryteirum zgodności hasła i hasła powtórzonego konta użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 public class AccountPasswordMatchValidator implements ConstraintValidator<AccountPasswordMatch, AccountPasswordForm> {
     
     @Override

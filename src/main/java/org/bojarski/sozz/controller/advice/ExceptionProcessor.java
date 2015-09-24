@@ -103,7 +103,8 @@ public class ExceptionProcessor {
     public ResponseEntity<?> handleWrongPasswordException(HttpServletRequest request,
             WrongPasswordException exception) {
         
-        // Informacja o wyjątku jest przekazywana w jedno-elementowej kolekcji aby odzwierciedlać odpowiedź serwera w przypadku złamania ograniczeń walidacji. 
+        // Informacja o wyjątku jest przekazywana w jedno-elementowej kolekcji
+        // aby odzwierciedlać odpowiedź serwera w przypadku złamania ograniczeń walidacji. 
         ArrayList<FieldErrorInfo> errorInfos = new ArrayList<>();
 
         errorInfos.add(new FieldErrorInfo(Messages.PASSWORD, exception.getCode(), exception.getMessage()));

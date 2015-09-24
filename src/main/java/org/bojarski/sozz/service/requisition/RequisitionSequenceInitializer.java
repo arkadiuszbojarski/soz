@@ -5,6 +5,12 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Klasa inicjalizująca obiekt klasy pomocniczej dla zapotrzebowań
+ * następnym dostępnym numerem dla zapotrzebowania.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 public class RequisitionSequenceInitializer implements InitializingBean {
 

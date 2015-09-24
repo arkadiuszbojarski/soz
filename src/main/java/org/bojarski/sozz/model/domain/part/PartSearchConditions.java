@@ -1,5 +1,10 @@
 package org.bojarski.sozz.model.domain.part;
 
+/**
+ * Klasa kryteriów wyszukiwania części.
+ * @author Arkadiusz Bojarski
+ *
+ */
 public class PartSearchConditions {
 
     private String number;
@@ -9,70 +14,80 @@ public class PartSearchConditions {
     private String supplier;
     
     /**
-     * @return the number
+     * Metoda zwracająca numer katalogowy części w kryteriach wyszukiwania części.
+     * @return napis będący numerem katalogowym części w kryteriach wyszukiwania części.
      */
     public String getNumber() {
         return this.number;
     }
     
     /**
-     * @param number the number to set
+     * Metoda pozwalająca na zmianę numeru katalogowego części w kryteriach wyszukiwania części.
+     * @param napis będący nowym numerem katalogowym części w kryteriach wyszukiwania części.
      */
     public void setNumber(String number) {
         this.number = number;
     }
     
     /**
-     * @return the description
+     * Metoda wracająca opis części w kryteriach wyszukiwania części.
+     * @return napis będący opisem części w kryteriach wyszukiwania części.
      */
     public String getDescription() {
         return this.description;
     }
     
     /**
-     * @param description the description to set
+     * Metoda pozwalająca na zmianę opisu części w kryteriach wyszukiwania części.
+     * @param napis będący nowym opisem części w kryteriach wyszukiwania części.
      */
     public void setDescription(String description) {
         this.description = description;
     }
     
     /**
-     * @return the category
+     * Metoda zwracająca nazwę kategorię części w kryteriach wyszukiwania części.
+     * @return napis będący nazwą kategorii części w kryteriach wyszukiwania części.
      */
     public String getCategory() {
         return this.category;
     }
     
     /**
-     * @param category the category name to set
+     * Metoda pozwalająca na zmianę nazwy kategorii części w kryteriach wyszukiwania części.
+     * @param napis będący nową nazwą kategorii części w kryteriach wyszukiwania części.
      */
     public void setCategory(String category) {
         this.category = category;
     }
     
     /**
-     * @return the material
+     * Metoda zwracająca materiał części w kryteriach wyszukiwania części.
+     * @return napis będący materiałem części w kryteriach wyszukiwania części.
      */
     public String getMaterial() {
         return this.material;
     }
     
     /**
-     * @param material the material to set
+     * Metoda pozwalająca na zmianę materiału części w kryteriach wyszukiwania części.
+     * @param napis będący nowym materiałem części w kryteriach wyszukiwania części.
      */
     public void setMaterial(String material) {
         this.material = material;
     }
     
     /**
-     * @return the supplier
+     * Metoda zwracająca nazwę dostawcy części w kryteriach wyszukiwania części.
+     * @return napis będący nazwą dostawcy części w kryteriach wyszukiwania części.
      */
     public String getSupplier() {
         return this.supplier;
     }
     
     /**
-     * @param supplier the supplier name to set
+     * Metoda pozwalająca na zmianę nazwy dostawcy części w kryteriach wyszukiwania części.
+     * @param napis będący nową nazwą dostawcy części w kryteriach wyszukiwania części.
      */
     public void setSupplier(String supplier) {
         this.supplier = supplier;

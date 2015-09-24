@@ -20,6 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejsu serwisu kategorii.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultCategoryService implements CategoryService {
@@ -30,6 +35,13 @@ public class DefaultCategoryService implements CategoryService {
 
     private final CategoryUtil categoryUtil;
     
+    /**
+     * Konstruktor przechowujący repozytorium kategorii i części oraz referencję
+     * do obiektu pomocniczej klasy kategorii.
+     * @param categoryRepository repozytorium kategorii.
+     * @param partRepository repozytorium części.
+     * @param categoryUtil obiekt klasy pomocniczej kategorii.
+     */
     @Autowired
     public DefaultCategoryService(CategoryRepository categoryRepository,
             PartRepository partRepository, CategoryUtil categoryUtil) {

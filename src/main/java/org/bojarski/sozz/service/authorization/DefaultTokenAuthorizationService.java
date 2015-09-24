@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementacja interfejs serwisu autoryzacji opartej o token.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class DefaultTokenAuthorizationService implements
         TokenAuthorizationService {

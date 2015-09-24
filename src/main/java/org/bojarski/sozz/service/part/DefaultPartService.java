@@ -21,6 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejsu serwisu części.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultPartService implements PartService {
@@ -31,6 +36,13 @@ public class DefaultPartService implements PartService {
     
     private final PartUtil partUtil;
     
+    /**
+     * Konstruktor przechowujący referencję do obiektu repozytorium części,
+     * repozytorium zapotrzebowań oraz obiektu klasy pomocniczej dla części.
+     * @param partRepository
+     * @param requisitionRepository
+     * @param partUtil
+     */
     @Autowired
     public DefaultPartService(PartRepository partRepository, RequisitionRepository requisitionRepository, PartUtil partUtil) {
         this.partRepository = partRepository;

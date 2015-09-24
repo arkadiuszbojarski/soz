@@ -1,5 +1,6 @@
 package org.bojarski.sozz.config;
 
+import org.bojarski.sozz.filter.CORSFilter;
 import org.bojarski.sozz.filter.StatelessAuthenticationFilter;
 import org.bojarski.sozz.filter.StatelessLoginFilter;
 import org.bojarski.sozz.service.authorization.EntryPoint;
@@ -60,10 +61,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/").permitAll()
+        .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
         .antMatchers(HttpMethod.POST, "/api/login").permitAll()
         .antMatchers("/api/**").authenticated().and()
-        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), StatelessAuthenticationFilter.class)
+        .addFilterBefore(new CORSFilter(), StatelessLoginFilter.class);
+        
     }
 
     @Bean

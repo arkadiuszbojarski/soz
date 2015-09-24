@@ -19,6 +19,11 @@ import org.springframework.stereotype.Component;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Klasa zawierająca metody pomocnicze dla zapotrzebowań.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class RequisitionUtil {
     
@@ -32,6 +37,16 @@ public class RequisitionUtil {
 
     private final DrawingUtil drawingUtil;
     
+    /**
+     * Konstruktor przechowujący referencję do obiektów repozytorium zapotrzebowań,
+     * obiektu klasy pomocniczej dla części,
+     * obiektu klasy pomocniczej dla jednostek oraz
+     * obiektu klasy pomocniczej dla rysunków.
+     * @param requisitionRepository
+     * @param partUtil
+     * @param unitUtil
+     * @param drawingUtil
+     */
     @Autowired
     public RequisitionUtil(RequisitionRepository requisitionRepository, PartUtil partUtil,
             UnitUtil unitUtil, DrawingUtil drawingUtil) {
@@ -41,10 +56,20 @@ public class RequisitionUtil {
         this.drawingUtil = drawingUtil;
     }
     
+    /**
+     * Metoda przechowująca następny dostępny dla zapotrzebowania numer.
+     * @param sequence
+     */
     public void setLastSequence(Long sequence) {
         this.sequence.set(sequence);
     }
 
+    /**
+     * Metoda pozwalająca na odczytanie lub utworzenie w bazie zapotrzebowania.
+     * @param requisition zapotrzebowanie które ma być
+     * odczytane lub utworzone.
+     * @return odczytane lub utworzone zapotrzebowanie.
+     */
     public Requisition readOrCreate(Requisition requisition) {
         if(requisition != null) {
             
@@ -89,6 +114,13 @@ public class RequisitionUtil {
         return null;
     }
     
+    /**
+     * Metoda pozwalająca na zmodyfikowanie zapotrzebowania.
+     * @param oldRequisition zapotrzebowanie modyfikowane.
+     * @param requisition zapotrzebowanie będące postacią jaką ma przyjąć 
+     * zapotrzebowanie modyfikowane.
+     * @return zmodyfikowane zapotrzebowanie.
+     */
     public Requisition update(Requisition oldRequisition, Requisition requisition) {
         oldRequisition.setEnd(new Date());
         Requisition newRequisition = new Requisition(
@@ -104,6 +136,12 @@ public class RequisitionUtil {
         return requisitionRepository.save(newRequisition);
     }
     
+    /**
+     * Metoda pozwalająca na utworzenie nowego zapotrzebowanie
+     * raz z odpowiednimi zależnościami.
+     * @param requisition tworzone zapotrzebowanie.
+     * @return zapotrzebowanie utworzone wraz z odpowiednimi zależnościami.
+     */
     public Requisition create(Requisition requisition) {
         if(requisition != null) {
             Requisition recreated = new Requisition(

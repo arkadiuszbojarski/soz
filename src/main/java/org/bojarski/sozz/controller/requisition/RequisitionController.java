@@ -144,7 +144,7 @@ public class RequisitionController {
             @RequestParam(value="page", defaultValue="0") Integer page,
             @RequestParam(value="size", defaultValue="12") Integer size,
             @RequestParam(value="direction", defaultValue="ASC") Direction direction,
-            @RequestParam(value="property", defaultValue="name") String property) {
+            @RequestParam(value="property", defaultValue="start") String property) {
         return new ResponseEntity<Page<Requisition>>(
                 service.readWithHistory(number,
                         new PageRequest(page, size, direction, property)

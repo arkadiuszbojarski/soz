@@ -19,6 +19,10 @@ public class AccountAuthentication implements Authentication {
     private final Account account;
     private boolean authenticated = true;
     
+    /**
+     * Konstruktor zapamiętujący referencję do konta użytkownika.
+     * @param account konto użytkownika dla którego powstaje obiekt uwierzytelniania.
+     */
     public AccountAuthentication(Account account) {
         this.account = account;
     }

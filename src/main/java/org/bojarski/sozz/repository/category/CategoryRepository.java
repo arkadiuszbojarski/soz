@@ -16,14 +16,14 @@ public interface CategoryRepository extends JpaRepository<Category, Long>, Query
     /**
      * Metoda wyszukująca kategorie o podanym fragmencie nazwy.
      * @param name napis na podstawie którego ma nastąpić wyszukanie kategorii o nazwie zawierającej podany napis.
-     * @return
+     * @return kolekcja kategorii zawierająca fragment nazwy.
      */
     Collection<Category> findByNameContaining(String name);
     
     /**
      * Metoda wyszukująca kategorie o podanej nazwie.
      * @param name napis na podstawie którego ma nastąpić wyszukanie kategorii o nazwie takiej jak podany napis.
-     * @return
+     * @return kategoria o podanej nazwie.
      */
     Category findOneByName(String name);
     

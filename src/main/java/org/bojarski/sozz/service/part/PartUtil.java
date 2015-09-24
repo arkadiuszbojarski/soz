@@ -15,6 +15,11 @@ import org.bojarski.sozz.service.unit.UnitUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Klasa zawierająca metody pomocnicze dla części.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class PartUtil {
 
@@ -30,6 +35,11 @@ public class PartUtil {
     @Autowired
     private SupplierUtil supplierUtil;
     
+    /**
+     * Metoda pozwalająca na odczytanie lub utworzenie w bazie części.
+     * @param part część która ma być odczytana lub utworzona w bazie.
+     * @return część odczytana lub utworzona w bazie.
+     */
     public Part readOrCreate(Part part) {
         if(part != null) {
             
@@ -77,6 +87,12 @@ public class PartUtil {
         return null;
     }
     
+    /**
+     * Metoda pozwalająca na zmodyfikowanie lub utworzenie części w bazie.
+     * @param part część która ma być zmodyfikowana lub utworzona w bazie.
+     * @param modified część będąca zmodyfikowaną postacią jaką ma przyjąć część.
+     * @return zmodyfikowana lub utworzona część.
+     */
     public Part updateOrCreate(Part part, Part modified) {
         if(part != null) {
             
@@ -120,6 +136,12 @@ public class PartUtil {
         return null;
     }
     
+    /**
+     * Metoda pozwalająca na odtworzenie podanej części wraz z
+     * odpowiednimi zależnościami.
+     * @param part część która ma zostać odtworzona wraz z zależnościami.
+     * @return część odtworzona wraz z zależnościami.
+     */
     public Part recreate(Part part) {
         if(part != null) {
             

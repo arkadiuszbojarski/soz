@@ -7,16 +7,30 @@ import org.bojarski.sozz.repository.supplier.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Klasa zawierająca metody pomocnicze dla dostawców.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class SupplierUtil {
 
     private final SupplierRepository supplierRepository;
 
+    /**
+     * Konstruktor zapamiętujący referencję do repozytorium dostawców.
+     * @param supplierRepository
+     */
     @Autowired
     public SupplierUtil(SupplierRepository supplierRepository) {
         this.supplierRepository = supplierRepository;
     }
     
+    /**
+     * Metoda pozwalająca na odczytanie lub utworzenie dostawcy w bazie.
+     * @param supplier dostawca który ma być odczytany lub utworzony w bazie.
+     * @return dostawca odczytany lub utworzony.
+     */
     public Supplier readOrCreate(Supplier supplier) {
         if(supplier != null) {
             

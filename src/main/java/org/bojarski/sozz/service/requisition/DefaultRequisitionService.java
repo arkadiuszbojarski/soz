@@ -16,6 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejsu serwisu zapotrzebowań.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultRequisitionService implements RequisitionService {
@@ -24,6 +29,12 @@ public class DefaultRequisitionService implements RequisitionService {
     
     private final RequisitionUtil requisitionUtil;
        
+    /**
+     * Konstruktor przechowujący referencję do obiektów
+     * repozytorium zapotrzebowań i klasy pomocniczej dla zapotrzebowań.
+     * @param requisitionRepository
+     * @param requisitionUtil
+     */
     @Autowired
     public DefaultRequisitionService(RequisitionRepository requisitionRepository, RequisitionUtil requisitionUtil) {
         this.requisitionRepository = requisitionRepository;
@@ -126,10 +137,7 @@ public class DefaultRequisitionService implements RequisitionService {
 
     @Override
     public Page<Requisition> readWithHistory(Long number, PageRequest pageRequest) {
-        QRequisition requisition = QRequisition.requisition;
-        BooleanBuilder where = new BooleanBuilder();
-        where.and(requisition.number.eq(number));
-        return (Page<Requisition>) requisitionRepository.findAll(where, pageRequest);
+        return (Page<Requisition>) requisitionRepository.findAllByNumber(number, pageRequest);
     }
 
     @Override

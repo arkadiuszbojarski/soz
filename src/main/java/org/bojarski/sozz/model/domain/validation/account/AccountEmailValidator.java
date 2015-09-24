@@ -10,6 +10,11 @@ import org.bojarski.sozz.model.domain.account.AccountIdentityForm;
 import org.bojarski.sozz.repository.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Klasa walidatora sprawdzającego spełnienie kryterium unikalności adresu email konta użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 public class AccountEmailValidator implements ConstraintValidator<UniqueAccountEmail, AccountIdentityForm> {
 
     private final AccountRepository accountRepository;

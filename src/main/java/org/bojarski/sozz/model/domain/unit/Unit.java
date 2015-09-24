@@ -13,7 +13,7 @@ import com.google.common.base.MoreObjects;
 import com.mysema.query.annotations.QueryEntity;
 
 /**
- * Klasa dziedziny modelująca encję jednostki miary.
+ * Klasa dziedziny modelująca jednostkę miary.
  * @author Arkadiusz Bojarski
  */
 @QueryEntity

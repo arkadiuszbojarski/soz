@@ -12,6 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementacja serwisu {@link UserDetailsService}
+ * wykorzystującego repozytorium kont użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 public class CurrentUserDetailsService implements UserDetailsService {
 

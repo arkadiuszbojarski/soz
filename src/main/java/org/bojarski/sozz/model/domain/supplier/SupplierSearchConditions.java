@@ -1,5 +1,10 @@
 package org.bojarski.sozz.model.domain.supplier;
 
+/**
+ * Klasa kryteriów wyszukiwania dostawców.
+ * @author Arkadiusz Bojarski
+ *
+ */
 public class SupplierSearchConditions {
 
     private String name;
@@ -11,98 +16,112 @@ public class SupplierSearchConditions {
     private String street;
     
     /**
-     * @return the name
+     * Metoda zwracająca kryterium nazwy dostawcy.
+     * @return napis będący nazwą dostawcy.
      */
     public String getName() {
         return this.name;
     }
     
     /**
-     * @param name the name to set
+     * Metoda pozwalająca na zmianę kryterium nazwy dostawcy.
+     * @param napis będący nową nazwą dostawcy.
      */
     public void setName(String name) {
         this.name = name;
     }
     
     /**
-     * @return the email
+     * Metoda zwracająca kryterium adresu email dostawcy.
+     * @return napis będący adresem email dostawcy.
      */
     public String getEmail() {
         return this.email;
     }
     
     /**
-     * @param email the email to set
+     * Metoda pozwalająca na zmianę kryterium adresu email dostawcy.
+     * @param napis będący nowym adresem email dostawcy.
      */
     public void setEmail(String email) {
         this.email = email;
     }
     
     /**
-     * @return the web
+     * Metoda zwracająca kryterium strony internetowej dostawcy.
+     * @return napis będący adresem strony internetowej dostawcy.
      */
     public String getWeb() {
         return this.web;
     }
     
     /**
-     * @param web the web to set
+     * Metoda pozwalająca na zmianę kryterium adresu strony internetowej dostawcy.
+     * @param napis będący nowym adresem strony internetowej dostawcy.
      */
     public void setWeb(String web) {
         this.web = web;
     }
     
     /**
-     * @return the phone
+     * Metoda zwracająca kryterium numeru telefonu dostawcy.
+     * @return napis będący numerem telefonu dostawcy.
      */
     public String getPhone() {
         return this.phone;
     }
     
     /**
-     * @param phone the phone to set
+     * Metoda pozwalająca na zmianę kryterium numeru telefonu dostawcy.
+     * @param napis będący nowym numerem telefony dostawcy.
      */
     public void setPhone(String phone) {
         this.phone = phone;
     }
     
     /**
-     * @return the country
+     * Metoda zwracająca kryterium kraju dostawcy.
+     * @return napis będący krajem dostawcy.
      */
     public String getCountry() {
         return this.country;
     }
     
     /**
-     * @param country the country to set
+     * Metoda pozwalająca na zmianę kryterium kraju dostawcy.
+     * @param napis oznaczający nowy kraj dostawcy.
      */
     public void setCountry(String country) {
         this.country = country;
     }
     
     /**
-     * @return the city
+     * Metoda zwracająca kryterium miasta dostawcy.
+     * @return napis oznaczający miasto dostawcy.
      */
     public String getCity() {
         return this.city;
     }
     
     /**
-     * @param city the city to set
+     * Metoda pozwalająca na zmianę kryterium miasta dostawcy.
+     * @param napis oznaczający nowe miasto dostawcy.
      */
     public void setCity(String city) {
         this.city = city;
     }
     
     /**
-     * @return the street
+     * Metoda zwracająca kryterium ulicy dostawcy.
+     * @return napis oznaczający ulicę dostawcy.
      */
     public String getStreet() {
         return this.street;
     }
     
     /**
-     * @param street the street to set
+     * Metoda pozwalająca na zmianę kryterium ulicy dostawcy.
+     * @param napis oznaczający nową uliczę dostawcy.
      */
     public void setStreet(String street) {
         this.street = street;

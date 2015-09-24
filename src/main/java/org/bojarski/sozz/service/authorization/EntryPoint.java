@@ -10,6 +10,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementacja {@link AuthenticationEntryPoint}
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class EntryPoint implements AuthenticationEntryPoint {
 

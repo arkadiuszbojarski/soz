@@ -2,6 +2,11 @@ package org.bojarski.sozz.model.domain.requisition;
 
 import java.util.Date;
 
+/**
+ * Klasa kryteriów wyszukiwania zapotrzebowań.
+ * @author Arkadiusz Bojarski
+ *
+ */
 public class RequisitionSearchConditions {
 
     private Long number;
@@ -18,168 +23,192 @@ public class RequisitionSearchConditions {
     private String supplier;
     
     /**
-     * @return the number
+     * Metoda zwracająca kryterium numeru zapotrzebowania.
+     * @return numer zapotrzebowania.
      */
     public Long getNumber() {
         return this.number;
     }
     
     /**
-     * @param number the number to set
+     * Metoda pozwalająca zmienić kryterium numeru zapotrzebowania.
+     * @param nowy numer zapotrzebowania.
      */
     public void setNumber(Long number) {
         this.number = number;
     }
     
     /**
-     * @return the after
+     * Metoda zwracająca kryterium utworzenia zapotrzebowania po dacie.
+     * @return data po jakiej utworzono zapotrzebowanie.
      */
     public Date getAfter() {
         return this.after;
     }
     
     /**
-     * @param after the after to set
+     * Metoda pozwalająca zmienić kryterium utworzenia zapotrzebowania po dacie.
+     * @param nowa data po jakiej utworzono zapotrzebowanie.
      */
     public void setAfter(Date after) {
         this.after = after;
     }
     
     /**
-     * @return the before
+     * Metoda zwracająca kryterium utworzenia zapotrzebowania przed datą.
+     * @return data przed jaką utworzono zapotrzebowanie.
      */
     public Date getBefore() {
         return this.before;
     }
     
     /**
-     * @param before the before to set
+     * Metoda pozwalająca zmienić kryterium utworzenia zapotrzebowania przed datą.
+     * @param nowa data przed jaką utworzono zapotrzebowanie.
      */
     public void setBefore(Date before) {
         this.before = before;
     }
     
     /**
-     * @return the author
+     * Metoda zwracająca kryterium nazwy autora zapotrzebowania.
+     * @return napis będący nazwą autora zapotrzebowania.
      */
     public String getAuthor() {
         return this.author;
     }
     
     /**
-     * @param author the author to set
+     * Metoda pozwalająca na zmianę kryterium nazwy autora zapotrzebowania.
+     * @param napis będący nową nazwą autora zapotrzebowania.
      */
     public void setAuthor(String author) {
         this.author = author;
     }
     
     /**
-     * @return the status
+     * Metoda zwracająca kryterium statusu zapotrzebowania.
+     * @return status zapotrzebowania.
      */
     public Status getStatus() {
         return this.status;
     }
     
     /**
-     * @param status the status to set
+     * Metoda pozwalająca na zmianę kryterium statusu zapotrzebowania.
+     * @param nowy status zapotrzebowania.
      */
     public void setStatus(Status status) {
         this.status = status;
     }
     
     /**
-     * @return the element
+     * Metoda zwracająca kryterium przeznaczenia części zapotrzebowania.
+     * @return napis określający przeznaczenie części zapotrzebowania.
      */
     public String getElement() {
         return this.element;
     }
     
     /**
-     * @param element the element to set
+     * Metoda pozwalająca na zmianę kryterium przeznaczenia części zapotrzebowania.
+     * @param napis będący nowym przeznaczeniem części zapotrzebowania.
      */
     public void setElement(String element) {
         this.element = element;
     }
     
     /**
-     * @return the drawing
+     * Metoda zwracająca kryterium numeru rysunku technicznego zapotrzebowania.
+     * @return napis będący numerem rysunku technicznego zapotrzebowania.
      */
     public String getDrawing() {
         return this.drawing;
     }
     
     /**
-     * @param drawing the drawing to set
+     * Metoda pozwalająca na zmianę kryterium numeru rysunku technicznego zapotrzebowania.
+     * @param napis będący nowym numerem rysunku technicznego zapotrzebowania.
      */
     public void setDrawing(String drawing) {
         this.drawing = drawing;
     }
     
     /**
-     * @return the part
+     * Metoda zwracająca kryterium numeru katalogowego części zapotrzebowania.
+     * @return napis będący numerem katalogowym części zapotrzebowania.
      */
     public String getPart() {
         return this.part;
     }
     
     /**
-     * @param part the part to set
+     * Metoda pozwalająca na zmianę kryterium numeru katalogowego części zapotrzebowania.
+     * @param napis będący nowym numerem katalogowym części zapotrzebowania.
      */
     public void setPart(String part) {
         this.part = part;
     }
     
     /**
-     * @return the description
+     * Metoda zwracająca kryterium opisu części zapotrzebowania.
+     * @return napis będący opisem części zapotrzebowania.
      */
     public String getDescription() {
         return this.description;
     }
     
     /**
-     * @param description the description to set
+     * Metoda pozwalająca na zmianę kryterium opisu części zapotrzebowania.
+     * @param napis będący nowym opisem części zapotrzebowania.
      */
     public void setDescription(String description) {
         this.description = description;
     }
     
     /**
-     * @return the category
+     * Metoda zwracająca kryterium nazwy kategorii części zapotrzebowania.
+     * @return napis będący nazwą kategorii części zapotrzebowania.
      */
     public String getCategory() {
         return this.category;
     }
     
     /**
-     * @param category the category to set
+     * Metoda pozwalająca na zmianę kryterium nazwy kategorii części zapotrzebowania.
+     * @param napis będący nowym kryterium nazwy kategorii części zapotrzebowania.
      */
     public void setCategory(String category) {
         this.category = category;
     }
     
     /**
-     * @return the material
+     * Metoda zwracająca kryterium materiału części zapotrzebowania.
+     * @return napis określający materiał części zapotrzebowania.
      */
     public String getMaterial() {
         return this.material;
     }
     
     /**
-     * @param material the material to set
+     * Metoda pozwalająca na zmianę kryterium materiału części zapotrzebowania.
+     * @param napis oznaczający nowy materiał części zapotrzebowania.
      */
     public void setMaterial(String material) {
         this.material = material;
     }
     
     /**
-     * @return the supplier
+     * Metoda zwracająca kryterium nazwy dostawcy części zapotrzebowania.
+     * @return napis będący nazwą dostawcy części zapotrzebowania.
      */
     public String getSupplier() {
         return this.supplier;
     }
     
     /**
-     * @param supplier the supplier to set
+     * Metoda pozwalająca na zmianę kryterium nazwy dostawcy części zapotrzebowania.
+     * @param napis będący nową nazwą dostawcy części zapotrzebowania.
      */
     public void setSupplier(String supplier) {
         this.supplier = supplier;

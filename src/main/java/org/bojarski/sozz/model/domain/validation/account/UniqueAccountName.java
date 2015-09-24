@@ -10,6 +10,11 @@ import javax.validation.Payload;
 
 import org.bojarski.sozz.messages.Messages;
 
+/**
+ * Adnotacja kryterium unikalności nazwy konta użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = AccountNameValidator.class)

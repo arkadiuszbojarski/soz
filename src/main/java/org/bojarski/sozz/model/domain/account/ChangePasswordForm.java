@@ -5,6 +5,11 @@ import javax.validation.constraints.Size;
 import org.bojarski.sozz.model.domain.validation.account.AccountPasswordMatch;
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * Klasa obiektu DTO formularza zmieny hasła konta użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @AccountPasswordMatch
 public class ChangePasswordForm implements AccountPasswordForm {
 
@@ -18,45 +23,43 @@ public class ChangePasswordForm implements AccountPasswordForm {
     @NotBlank
     private String passwordOld;
 
-    /**
-     * @return the password
-     */
     @Override
     public String getPassword() {
         return this.password;
     }
 
     /**
-     * @param password the password to set
+     * Metoda pozwalająca na zmianę hasła formularza zmiany hasła konta użytkownika.
+     * @param napis będący nowym hasłem formularza zmiany hasła konta użytkownika.
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return the passwordRepeated
-     */
     @Override
     public String getPasswordRepeated() {
         return this.passwordRepeated;
     }
 
     /**
-     * @param passwordRepeated the passwordRepeated to set
+     * Metoda pozwalająca na zmianę powtórzonego hasła formularza zmiany hasła konta użytkownika.
+     * @param napis będący nowym powtórzonym hasłem formularza zmiany hasła konta użytkownika.
      */
     public void setPasswordRepeated(String passwordRepeated) {
         this.passwordRepeated = passwordRepeated;
     }
 
     /**
-     * @return the passwordOld
+     * Metoda zwracająca stare hasło formularza zmiany hasła konta użytkownika.
+     * @return napis będący starym hasłem użytkownika.
      */
     public String getPasswordOld() {
         return this.passwordOld;
     }
 
     /**
-     * @param passwordOld the passwordOld to set
+     * Metoda pozwalająca zmienić stare hasło formularza zmiany hasła konta użytkownika.
+     * @param napis będący nowym starym hasłem formularza zmiany hasła konta użytkownika.
      */
     public void setPasswordOld(String passwordOld) {
         this.passwordOld = passwordOld;

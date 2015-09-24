@@ -21,11 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejs konta użytkownika.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultAccountService implements AccountService {
     
     private final AccountRepository accountRepository;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     
     @Autowired
     public DefaultAccountService(AccountRepository accountRepository) {
@@ -56,7 +62,7 @@ public class DefaultAccountService implements AccountService {
         Account account = new Account();
         account.setUsername(accountCreateForm.getUsername());
         account.setEmail(accountCreateForm.getEmail());
-        account.setPassword(new BCryptPasswordEncoder().encode(accountCreateForm.getPassword()));
+        account.setPassword(encoder.encode(accountCreateForm.getPassword()));
         return accountRepository.save(account);
     }
 

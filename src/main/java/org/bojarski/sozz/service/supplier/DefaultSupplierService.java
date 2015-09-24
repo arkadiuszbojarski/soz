@@ -21,6 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejsu serwisu dostawców.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultSupplierService implements SupplierService {
@@ -31,6 +36,13 @@ public class DefaultSupplierService implements SupplierService {
 
     private final SupplierUtil supplierUtil;
 
+    /**
+     * Konstruktor przechowujący referencję do obiektów repozytorium dostawców,
+     * repozytorium części oraz klasy pomocniczej dla dostawców.
+     * @param supplierRepository
+     * @param partRepository
+     * @param supplierUtil
+     */
     @Autowired
     public DefaultSupplierService(SupplierRepository supplierRepository,
             PartRepository partRepository, SupplierUtil supplierUtil) {

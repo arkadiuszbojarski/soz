@@ -7,12 +7,22 @@ import org.bojarski.sozz.repository.category.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Klasa zawierająca metody pomocnicze dla kategorii.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Component
 public class CategoryUtil {
 
     @Autowired
     private CategoryRepository categoryRepository;
     
+    /**
+     * Metoda pozwalająca na odczytanie z bazy lub skopiowanie podanej kategorii.
+     * @param category kategoria która ma być odczytana z bazy lub skopiowana.
+     * @return odczytana lub skopiowana kategoria.
+     */
     public Category readOrRecreate(Category category) {
         if(category != null) {
             Category resultingCategory = null;
@@ -45,6 +55,11 @@ public class CategoryUtil {
         return null;
     }
     
+    /**
+     * Metoda pozwalająca na odczytanie lub utworzenie w bazie podanej kategorii. 
+     * @param category kategorie która ma być odczytana lub utworzona w bazie.
+     * @return odczytana lub utworzona w bazie kategoria.
+     */
     public Category readOrCreate(Category category) {
         if(category != null) {
 

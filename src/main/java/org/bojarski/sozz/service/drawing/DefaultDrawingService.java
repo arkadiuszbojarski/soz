@@ -20,6 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 
+/**
+ * Implementacja interfejsu serwisu rysunków technicznych.
+ * @author Arkadiusz Bojarski
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class DefaultDrawingService implements DrawingService {
@@ -30,6 +35,13 @@ public class DefaultDrawingService implements DrawingService {
 
     private final DrawingUtil drawingUtil;
     
+    /**
+     * Konstruktor przechowujący referencję do repozytorium rysunków i zapotrzebowań
+     * oraz obiektu klasy pomocniczej rysunków.
+     * @param drawingRepository
+     * @param requisitionRepository
+     * @param drawingUtil
+     */
     @Autowired
     public DefaultDrawingService(DrawingRepository drawingRepository, RequisitionRepository requisitionRepository, DrawingUtil drawingUtil) {
         this.drawingRepository = drawingRepository;
