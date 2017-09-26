@@ -164,6 +164,7 @@ public class RequisitionController {
         return new ResponseEntity<Requisition>(
                 service.update(number, requisition), HttpStatus.OK);
     }
+    
     /**
      * Metoda zwracająca tablicę dostępnych {@link Status} jakie może mieć zapotrzebowanie.
      * @return odpowiedź zawierająca tablicę dostępnych statusów zapotrzebowanie oraz status oznaczający pomyślne wykonanie akcji. 
