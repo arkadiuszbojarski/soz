@@ -19,7 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysema.query.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
 
 /**
  * Implementacja interfejsu serwisu części.
@@ -86,8 +86,7 @@ public class DefaultPartService implements PartService {
         BooleanBuilder where = new BooleanBuilder();
         
         if(query != null){
-            where.and(
-                    part.number.containsIgnoreCase(query)
+            where.and(part.number.containsIgnoreCase(query)
                     .or(part.description.containsIgnoreCase(query))
                     .or(part.category.name.containsIgnoreCase(query))
                     .or(part.material.containsIgnoreCase(query))

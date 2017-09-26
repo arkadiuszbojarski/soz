@@ -25,6 +25,4 @@ public interface AccountRepository extends JpaRepository<Account, Long>, QueryDs
      */
     public Account findOneByEmail(String email);
     
-    //public Page<Account> findByUsernameContaining(String username, Pageable pageable);
-
 }

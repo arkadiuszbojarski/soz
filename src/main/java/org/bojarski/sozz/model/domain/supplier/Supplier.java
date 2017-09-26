@@ -12,8 +12,7 @@ import javax.validation.Valid;
 import org.bojarski.sozz.model.domain.contact.Contact;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEntity;
+import com.querydsl.core.annotations.QueryEntity;
 
 @QueryEntity
 @Entity
@@ -62,14 +61,4 @@ public class Supplier {
     public void setContact(Contact contact) {
         this.contact = contact;
     }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .add("contact", contact)
-                .toString();
-    }
-    
 }

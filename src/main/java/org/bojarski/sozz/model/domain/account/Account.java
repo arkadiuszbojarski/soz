@@ -15,7 +15,7 @@ import org.bojarski.sozz.model.views.View.ExtendedView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEntity;
+import com.querydsl.core.annotations.QueryEntity;
 
 /**
  * Klasa obiektu domeny: konto użytkownika.

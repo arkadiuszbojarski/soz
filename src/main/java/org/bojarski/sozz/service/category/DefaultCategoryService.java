@@ -18,7 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysema.query.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
 
 /**
  * Implementacja interfejsu serwisu kategorii.
@@ -92,7 +92,7 @@ public class DefaultCategoryService implements CategoryService {
             where.and(category.name.containsIgnoreCase(query));
         }
         
-        return where.hasValue() ? categoryRepository.findAll(where, pageRequest) : categoryRepository.findAll(pageRequest);
+        return categoryRepository.findAll(where, pageRequest);
     }
     
     @Override

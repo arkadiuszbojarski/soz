@@ -1,21 +1,17 @@
 package org.bojarski.sozz.config;
 
-import org.bojarski.sozz.filter.CORSFilter;
 import org.bojarski.sozz.filter.StatelessAuthenticationFilter;
 import org.bojarski.sozz.filter.StatelessLoginFilter;
 import org.bojarski.sozz.service.authorization.EntryPoint;
 import org.bojarski.sozz.service.authorization.TokenAuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,9 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  *
  */
 @Configuration
-@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -50,26 +44,43 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .passwordEncoder(new BCryptPasswordEncoder());
     }
     
+    /* (non-Javadoc)
+     * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-        .anonymous().and()
-        .servletApi().and()
-        .headers().cacheControl().and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .exceptionHandling().authenticationEntryPoint(entryPoint).and()
-        .csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/").permitAll()
-        .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-        .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-        .antMatchers("/api/**").authenticated().and()
-        .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), StatelessAuthenticationFilter.class)
-        .addFilterBefore(new CORSFilter(), StatelessLoginFilter.class);
-        
+    	http.csrf().disable()
+    	.anonymous().and()
+    	.servletApi().and()
+    	.headers().cacheControl().and().and()
+    	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+    	.exceptionHandling().authenticationEntryPoint(entryPoint).and()
+    	.authorizeRequests()
+    	.antMatchers("/").permitAll()
+    	.antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+    	.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+    	.antMatchers("/api/**").authenticated().and()
+    	.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
+    	.addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), StatelessAuthenticationFilter.class);
     }
-
+    
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//        .anonymous().and()
+//        .servletApi().and()
+//        .headers().cacheControl().and()
+//        //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//        //.exceptionHandling().authenticationEntryPoint(entryPoint).and()
+//        .authorizeRequests()
+//        .antMatchers("/").permitAll()
+//        .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+//        .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+//        .antMatchers("/api/**").authenticated().and()
+//        .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
+//        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), StatelessAuthenticationFilter.class);
+//    }
+    
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

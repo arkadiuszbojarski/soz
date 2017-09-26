@@ -9,8 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEntity;
+import com.querydsl.core.annotations.QueryEntity;
 
 /**
  * Klasa dziedziny modelująca kategorie części.
@@ -67,13 +66,4 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("name", name)
-                .toString();
-    }
-
 }

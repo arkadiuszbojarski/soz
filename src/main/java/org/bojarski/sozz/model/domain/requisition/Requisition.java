@@ -24,8 +24,8 @@ import org.bojarski.sozz.model.domain.drawing.Drawing;
 import org.bojarski.sozz.model.domain.part.Part;
 import org.bojarski.sozz.model.domain.unit.Unit;
 
-import com.mysema.query.annotations.QueryEntity;
-import com.mysema.query.annotations.QueryInit;
+import com.querydsl.core.annotations.QueryEntity;
+import com.querydsl.core.annotations.QueryInit;
 
 /**
  * Klasa domeny modelująca zapotrzebowanie.

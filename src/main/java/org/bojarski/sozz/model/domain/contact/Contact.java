@@ -6,8 +6,7 @@ import javax.validation.Valid;
 
 import org.bojarski.sozz.model.domain.address.Address;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEmbeddable;
+import com.querydsl.core.annotations.QueryEmbeddable;
 
 /**
  * Klasa dziedziny modelująca kontakt {@link Supplier}.
@@ -110,15 +109,4 @@ public class Contact {
     public void setAddress(Address address) {
         this.address = address;
     }
-    
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("email", email.replaceFirst("@.*", "@***"))
-                .add("web site", web_site.replaceFirst(web_site.substring(13), "***"))
-                .add("phone", phone.replaceFirst(phone.substring(2), "***"))
-                .add("address", address)
-                .toString();
-    }
-
 }

@@ -12,6 +12,7 @@ import org.bojarski.sozz.model.exception.AlreadyExistsException;
 import org.bojarski.sozz.model.exception.NotFoundException;
 import org.bojarski.sozz.model.exception.WrongPasswordException;
 import org.bojarski.sozz.repository.account.AccountRepository;
+import org.hibernate.hql.internal.ast.tree.BooleanLiteralNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysema.query.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
 
 /**
  * Implementacja interfejs konta użytkownika.
@@ -48,7 +49,7 @@ public class DefaultAccountService implements AccountService {
             .or(account.email.containsIgnoreCase(query));
         }
         
-        return where.hasValue() ? accountRepository.findAll(where, pageRequest) : accountRepository.findAll(pageRequest);
+        return accountRepository.findAll(where, pageRequest);
     }
     
     @Override

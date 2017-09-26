@@ -19,7 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysema.query.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
 
 /**
  * Implementacja interfejsu serwisu dostawców.
@@ -91,8 +91,7 @@ public class DefaultSupplierService implements SupplierService {
         BooleanBuilder where = new BooleanBuilder();
         
         if(query != null) {
-            where.and(
-                    supplier.name.containsIgnoreCase(query)
+            where.and(supplier.name.containsIgnoreCase(query)
                     .or(supplier.contact.email.containsIgnoreCase(query))
                     .or(supplier.contact.web_site.containsIgnoreCase(query))
                     .or(supplier.contact.phone.containsIgnoreCase(query))

@@ -2,8 +2,7 @@ package org.bojarski.sozz.model.domain.address;
 
 import javax.persistence.Embeddable;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEmbeddable;
+import com.querydsl.core.annotations.QueryEmbeddable;
 
 /**
  * Klasa obiektu domeny adresu {@link Supplier}.
@@ -105,15 +104,4 @@ public class Address {
     public void setStreet(String street) {
         this.street = street;
     }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("country", country.replaceFirst(country.substring(2), "***"))
-                .add("city", city.replaceFirst(city.substring(2), "***"))
-                .add("postal code", postal_code.replaceFirst(postal_code.substring(2), "***"))
-                .add("street", street.replaceFirst(street.substring(2), "***"))
-                .toString();
-    }
-    
 }

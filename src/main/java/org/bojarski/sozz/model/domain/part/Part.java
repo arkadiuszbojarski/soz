@@ -20,9 +20,8 @@ import org.bojarski.sozz.model.domain.dimension.Dimension;
 import org.bojarski.sozz.model.domain.supplier.Supplier;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEntity;
-import com.mysema.query.annotations.QueryInit;
+import com.querydsl.core.annotations.QueryEntity;
+import com.querydsl.core.annotations.QueryInit;
 
 /**
  * Klasa domeny modelująca część.
@@ -195,18 +194,4 @@ public class Part {
     public Long getId() {
         return this.id;
     }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("number", number)
-                .add("description", description)
-                .add("category", category)
-                .add("dimensions", dimensions)
-                .add("material", material)
-                .add("supplier", supplier)
-                .toString();
-    }
-    
 }

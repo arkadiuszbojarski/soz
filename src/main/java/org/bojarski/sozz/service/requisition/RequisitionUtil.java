@@ -17,7 +17,7 @@ import org.bojarski.sozz.service.unit.UnitUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mysema.query.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
 
 /**
  * Klasa zawierająca metody pomocnicze dla zapotrzebowań.

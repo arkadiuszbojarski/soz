@@ -26,33 +26,6 @@
 	               </select>
 	           </div>
 	        </div>
-		    <div class="form-group">
-	            <label for="amount" class="col-sm-2 control-label">{{"amount" | translate}}</label>
-	            <div class="col-sm-5">
-	                <input type="number" min="0" step="0.0001" class="form-control"
-	                    ng-model="requisition.amount" autocomplete="off"/>
-	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'amount'}:true">
-	                    {{error.code | translate}}
-	                </alert>
-	            </div>
-	            <div class="col-sm-5 scrollable-dropdown-menu">
-                    <div class="input-group">
-	                    <input type="text" class="form-control" ng-disabled="requisition.unit.id"
-	                        ng-model="requisition.unit.name" autocomplete="off"
-	                        ng-change="hint_units(requisition.unit.name)"
-	                        typeahead-on-select="requisitionUnitSelect($item, $model, $label)"
-	                        typeahead="unit.name for unit in units | unique:'name'"/>
-	                    <div class="input-group-btn">
-	                        <button type="button" class="btn btn-default" ng-disabled="!requisition.unit.id" ng-click="requisition.unit.id=''">
-	                            <i class="glyphicon glyphicon-edit"></i>
-	                        </button>
-	                    </div>
-                    </div>
-	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'unit.name'}:true">
-	                        {{error.code | translate}}
-	                </alert>
-	            </div>
-            </div>
             <div class="form-group">
                 <label for="drawing" class="col-sm-2 control-label">{{"drawing.number" | translate}}</label>
                 <div class="col-sm-10 scrollable-dropdown-menu">
@@ -98,6 +71,33 @@
                     </alert>
 	            </div>
 	        </div>
+	        <div class="form-group">
+	            <label for="amount" class="col-sm-2 control-label">{{"amount" | translate}}</label>
+	            <div class="col-sm-5">
+	                <input type="number" min="0" step="0.0001" class="form-control"
+	                    ng-model="requisition.amount" autocomplete="off"/>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'amount'}:true">
+	                    {{error.code | translate}}
+	                </alert>
+	            </div>
+	            <div class="col-sm-5 scrollable-dropdown-menu">
+                    <div class="input-group">
+	                    <input type="text" class="form-control" ng-disabled="requisition.unit.id"
+	                        ng-model="requisition.unit.name" autocomplete="off"
+	                        ng-change="hint_units(requisition.unit.name)"
+	                        typeahead-on-select="requisitionUnitSelect($item, $model, $label)"
+	                        typeahead="unit.name for unit in units | unique:'name'"/>
+	                    <div class="input-group-btn">
+	                        <button type="button" class="btn btn-default" ng-disabled="!requisition.unit.id" ng-click="requisition.unit.id=''">
+	                            <i class="glyphicon glyphicon-edit"></i>
+	                        </button>
+	                    </div>
+                    </div>
+	                <alert type="danger" ng-repeat="error in errors | filter:{field: 'unit.name'}:true">
+	                        {{error.code | translate}}
+	                </alert>
+	            </div>
+            </div>
 	        <div class="form-group">
 	            <label for="part_description" class="col-sm-2 control-label">{{"description" | translate}}</label>
 	            <div class="col-sm-10">

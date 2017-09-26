@@ -11,8 +11,7 @@ import javax.validation.constraints.NotNull;
 import org.bojarski.sozz.model.domain.unit.Unit;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.google.common.base.MoreObjects;
-import com.mysema.query.annotations.QueryEmbeddable;
+import com.querydsl.core.annotations.QueryEmbeddable;
 
 /**
  * Klasa domeny modelująca wymiar części.
@@ -101,14 +100,4 @@ public class Dimension {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
-    
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("name", name)
-                .add("value", value)
-                .add("unit", unit)
-                .toString();
-    }
-    
 }
