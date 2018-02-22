@@ -1,9 +1,9 @@
 package org.bojarski.sozz;
 
 
-import org.bojarski.sozz.model.domain.account.Account;
-import org.bojarski.sozz.model.domain.account.Role;
-import org.bojarski.sozz.repository.account.AccountRepository;
+import org.bojarski.sozz.model.Account;
+import org.bojarski.sozz.model.Role;
+import org.bojarski.sozz.repository.AccountRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

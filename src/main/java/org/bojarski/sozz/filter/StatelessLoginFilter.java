@@ -7,12 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.bojarski.sozz.model.authentication.AccountAuthentication;
-import org.bojarski.sozz.model.authentication.AuthenticationToken;
-import org.bojarski.sozz.model.domain.account.Account;
-import org.bojarski.sozz.model.domain.account.CurrentUser;
-import org.bojarski.sozz.model.domain.account.LoginForm;
-import org.bojarski.sozz.service.authorization.TokenAuthorizationService;
+import org.bojarski.sozz.dto.LoginForm;
+import org.bojarski.sozz.model.Account;
+import org.bojarski.sozz.security.AccountAuthentication;
+import org.bojarski.sozz.security.AuthenticationToken;
+import org.bojarski.sozz.security.CurrentUser;
+import org.bojarski.sozz.service.TokenAuthorizationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -2,8 +2,8 @@ package org.bojarski.sozz.config;
 
 import org.bojarski.sozz.filter.StatelessAuthenticationFilter;
 import org.bojarski.sozz.filter.StatelessLoginFilter;
-import org.bojarski.sozz.service.authorization.EntryPoint;
-import org.bojarski.sozz.service.authorization.TokenAuthorizationService;
+import org.bojarski.sozz.service.EntryPoint;
+import org.bojarski.sozz.service.TokenAuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

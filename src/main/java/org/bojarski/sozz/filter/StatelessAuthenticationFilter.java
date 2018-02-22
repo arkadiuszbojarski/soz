@@ -8,8 +8,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.bojarski.sozz.model.authentication.AuthenticationToken;
-import org.bojarski.sozz.service.authorization.TokenAuthorizationService;
+import org.bojarski.sozz.security.AuthenticationToken;
+import org.bojarski.sozz.service.TokenAuthorizationService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
